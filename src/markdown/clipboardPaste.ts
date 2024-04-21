@@ -1,7 +1,7 @@
-import { Plugin, PluginKey } from '@tiptap/pm/state';
+import { elementFromString, Extension } from '@tiptap/core';
 import { DOMParser, Slice } from '@tiptap/pm/model';
-import { Extension, elementFromString } from '@tiptap/core';
-import { aHeadingHtmlToMd, isInCode, isMarkdown, mdTitleToHtml, mdTailToHtml, mdWenhaoToHtml } from './utils';
+import { Plugin, PluginKey } from '@tiptap/pm/state';
+import { isInCode, isMarkdown, mdTailToHtml, mdTitleToHtml, mdWenhaoToHtml } from './utils';
 
 export const MarkdownClipboardPaste = Extension.create({
   name: 'markdownClipboardPaste',
@@ -16,11 +16,7 @@ export const MarkdownClipboardPaste = Extension.create({
           handlePaste: (view, event) => {
             const editable = this.editor.isEditable;
             const { clipboardData } = event;
-            if (
-              !editable ||
-              !clipboardData ||
-              clipboardData.files.length !== 0
-            ) {
+            if (!editable || !clipboardData || clipboardData.files.length !== 0) {
               return false;
             }
 
@@ -41,7 +37,7 @@ export const MarkdownClipboardPaste = Extension.create({
               newText = mdWenhaoToHtml(newText);
               newText = mdTitleToHtml(newText);
               const html = this.editor.storage.markdown?.parser?.parse?.(newText, {
-                inline: false,
+                inline: false
               });
               console.log('html', html);
               if (!html || typeof html !== 'string') return false;
@@ -60,9 +56,9 @@ export const MarkdownClipboardPaste = Extension.create({
             }
 
             return false;
-          },
-        },
-      }),
+          }
+        }
+      })
     ];
-  },
+  }
 });

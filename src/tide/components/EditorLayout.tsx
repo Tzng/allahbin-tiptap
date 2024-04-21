@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import React, { PropsWithChildren } from 'react';
 import { EditorContextProvider, useEditorContext } from '../context/EditorContext';
 
-import { TideEditor } from '@gitee/tide';
+import type { TideEditor } from '../TideEditor';
 
 const Layout: React.FC<
   PropsWithChildren<{

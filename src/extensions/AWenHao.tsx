@@ -1,12 +1,5 @@
 import { Node, textblockTypeInputRule } from '@tiptap/core';
 
-const tailStyles = {
-  textAlign: 'right',
-  padding: '0 4ch', // 末尾添加四个字符宽度的空间
-  margin: '0', // 无段前段后
-  lineHeight: '1' // 单倍行距
-};
-
 export type Level = 1 | 2 | 3;
 
 export interface HeadingOptions {
@@ -19,7 +12,7 @@ declare module '@tiptap/core' {
       /**
        * Set a heading node
        */
-      setWenHao: (p: { level: number }) => ReturnType;
+      setWenHao: () => ReturnType;
       /**
        * Toggle a heading node
        */

@@ -5,6 +5,7 @@
     "declaration": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
+    "downlevelIteration": true,
     "jsx": "react",
     "baseUrl": "./",
     "lib": ["esnext", "dom"],

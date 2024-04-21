@@ -1,8 +1,7 @@
-import { IconBoldBold } from '@gitee/icons-react';
 import { isActive } from '@gitee/tide-common';
-import { Button, MenuBarItem, Tooltip, useStatusMap } from '@gitee/tide-extension-menubar';
+import { BoldProps, MenuBarItem, Tooltip, useStatusMap } from '@gitee/tide-extension-menubar';
 import React from 'react';
-import { BoldProps } from '../menubar';
+import TextButton from './TextButton';
 
 export type EmojiProps = {
   className?: string;
@@ -23,13 +22,19 @@ export const ATailBar: React.FC<BoldProps> = ({ className, style, title }) => {
   return (
     <MenuBarItem className={className} style={style}>
       <Tooltip text="落款">
-        <Button
+        <TextButton
           onClick={() => editor.chain().focus().toggleATail().run()}
           isActive={statusMap?.isActive}
           disabled={statusMap?.disabled}
+          style={{
+            width: 48,
+            justifyContent: 'center',
+            display: 'flex',
+            alignItems: 'center'
+          }}
         >
-          <IconBoldBold />
-        </Button>
+          落款
+        </TextButton>
       </Tooltip>
     </MenuBarItem>
   );

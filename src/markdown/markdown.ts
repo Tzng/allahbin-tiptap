@@ -13,7 +13,6 @@ export type MarkdownOptions = {
   breaks?: boolean;
   paste?: boolean;
   copy?: boolean;
-  initialContent?: any;
 };
 
 export const Markdown = TiptapMarkdown.extend<MarkdownOptions>({

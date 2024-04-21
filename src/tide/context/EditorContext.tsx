@@ -1,5 +1,5 @@
-import type { EditorEvents, TideEditor } from '@gitee/tide';
-import React, { PropsWithChildren, createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, PropsWithChildren, useContext, useEffect, useState } from 'react';
+import type { EditorEvents, TideEditor } from '../TideEditor';
 
 export type EditorContextType = {
   editor: TideEditor | null;

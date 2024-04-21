@@ -1,4 +1,3 @@
-import { TideEditor } from '@gitee/tide';
 import {
   Blockquote,
   Bold,
@@ -25,6 +24,7 @@ import React, { useMemo } from 'react';
 import { ATailBar } from '../../extensions/ATailBar';
 import { ATitleBar } from '../../extensions/ATitleBar';
 import { AWenHaoBar } from '../../extensions/AWenHaoBar';
+import type { TideEditor } from '../TideEditor';
 import { useEditorContext } from '../context/EditorContext';
 
 export const EditorMenu: React.FC<{
@@ -59,9 +59,9 @@ export const EditorMenu: React.FC<{
         editor.menuEnableUndoRedo && <Redo key="redo" />
       ],
       [
-        AWenHao && <AWenHaoBar key="AWenhao" />,
-        ATail && <ATailBar key="ATail" />,
         ATitle && <ATitleBar key="ATitle" />,
+        ATail && <ATailBar key="ATail" />,
+        AWenHao && <AWenHaoBar key="AWenhao" />,
         bold && <Bold key="bold" />,
         italic && <Italic key="italic" />,
         strike && <Strike key="strike" />,

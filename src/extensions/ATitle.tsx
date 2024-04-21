@@ -57,7 +57,6 @@ export const ATitle = Node.create<HeadingOptions>({
 
   renderHTML({ node, HTMLAttributes }) {
     console.log('renderHTML');
-    // @ts-ignore
     const hasLevel = this.options.levels.includes(node.attrs.level);
     const level = hasLevel ? node.attrs.level : this.options.levels[0];
     // 根据级别来获取对应的div样式
@@ -80,7 +79,6 @@ export const ATitle = Node.create<HeadingOptions>({
         attributes =>
         ({ commands }) => {
           console.log('setHeading');
-          // @ts-ignore
           if (!this.options.levels.includes(attributes.level)) {
             return false;
           }
@@ -92,7 +90,7 @@ export const ATitle = Node.create<HeadingOptions>({
       toggleATitle:
         attributes =>
         ({ commands }) => {
-          // @ts-ignore
+          console.log('toggleATitle');
           if (!this.options.levels.includes(attributes.level)) {
             return false;
           }

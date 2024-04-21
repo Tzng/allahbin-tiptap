@@ -1,7 +1,7 @@
-import { TideEditor } from '@gitee/tide';
 import { EditorContent as TEditorContent } from '@gitee/tide-react';
 import classNames from 'classnames';
 import React from 'react';
+import type { TideEditor } from '../TideEditor';
 
 export type EditorContentProps = {
   editor: TideEditor | null;

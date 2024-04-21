@@ -1,8 +1,7 @@
-import { IconBoldBold } from '@gitee/icons-react';
+import TextButton from '@allahbin/tiptap/extensions/TextButton';
 import { isActive } from '@gitee/tide-common';
-import { Button, MenuBarItem, Tooltip, useStatusMap } from '@gitee/tide-extension-menubar';
+import { BoldProps, MenuBarItem, Tooltip, useStatusMap } from '@gitee/tide-extension-menubar';
 import React from 'react';
-import { BoldProps } from '../menubar';
 
 export type EmojiProps = {
   className?: string;
@@ -10,7 +9,7 @@ export type EmojiProps = {
   title?: string;
 };
 
-export const AWenHaoBar: React.FC<BoldProps> = ({ className, style, title }) => {
+export const AWenHaoBar: React.FC<BoldProps> = ({ className, style }) => {
   const { editor, statusMap } = useStatusMap(() => ({
     isActive: () => {
       return isActive(editor.state, 'AWenHao');
@@ -21,15 +20,21 @@ export const AWenHaoBar: React.FC<BoldProps> = ({ className, style, title }) => 
   }));
 
   return (
-    <MenuBarItem className={className} style={style}>
+    <MenuBarItem className={className}>
       <Tooltip text="文号">
-        <Button
+        <TextButton
           onClick={() => editor.chain().focus().toggleWenHao().run()}
           isActive={statusMap?.isActive}
           disabled={statusMap?.disabled}
+          style={{
+            width: 48,
+            justifyContent: 'center',
+            display: 'flex',
+            alignItems: 'center'
+          }}
         >
-          <IconBoldBold />
-        </Button>
+          文号
+        </TextButton>
       </Tooltip>
     </MenuBarItem>
   );

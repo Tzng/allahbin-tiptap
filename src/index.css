@@ -1,43 +1,50 @@
+.tide-content .ProseMirror {
+  font-family: 宋体;
+  font-size: 12pt;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  text-indent: 2em;
+}
 .a-tiptap-tail {
-	text-align: right;
-	padding: 0 4ch;
-	margin: 0;
-	line-height: 1;
+  text-align: right;
+  padding: 0 4ch;
+  margin: 0;
+  line-height: 1;
 }
 
-.a-tiptap-h1 {
-	font-family: 宋体;
-	font-size: 12pt;
-	font-weight: bold;
-	text-indent: 2em;
-	margin-top: 2px;
-	margin-bottom: 2px;
+.tide-content .tide-menu-head-row__title--levelATitle1,.a-tiptap-title1 {
+  font-family: 宋体;
+  font-size: 16pt;
+  font-weight: bold;
+  text-align: center;
+  text-indent: 0em;
+  margin: 0;
 }
 
-.a-tiptap-h2 {
-	font-family: 楷体;
-	font-size: 12pt;
-	text-indent: 2em;
-	margin-top: 2px;
-	margin-bottom: 2px;
-	line-height: 1.8em;
+.tide-content .a-tiptap-title2, .tide-menu-head-row__title--levelATitle2 {
+  font-family: 楷体;
+  font-size: 12pt;
+  text-indent: 2em;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  line-height: 1.8em;
 }
 
-.a-tiptap-h3 {
-	font-family: 宋体;
-	margin-top: 2px;
-	margin-bottom: 2px;
-	text-align: center;
-	text-indent: 0em;
-	font-size: 1.125em;
-	font-weight: 600;
+.tide-content .a-tiptap-title3 {
+  font-family: 宋体;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  text-align: center;
+  text-indent: 0em;
+  font-size: 1.125em;
+  font-weight: 600;
 }
 
-.a-tiptap-wenhao {
-	font-family: 楷体;
-	font-size: 12pt;
-	text-align: center;
-	text-indent: 0em;
-	margin-top: 1.5em;
-	margin-bottom: 1.5em;
+.tide-content .a-tiptap-wenhao {
+  font-family: 楷体;
+  font-size: 12pt;
+  text-align: center;
+  text-indent: 0em;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
 }

@@ -1,41 +1,67 @@
-import { Commands, HighPriorityKeymap, LowPriorityKeymap } from '@gitee/tide-common';
-import { Blockquote, BlockquoteOptions } from '@gitee/tide-extension-blockquote';
-import { Bold, BoldOptions } from '@gitee/tide-extension-bold';
-import { BulletList, BulletListOptions } from '@gitee/tide-extension-bullet-list';
-import { Code, CodeOptions } from '@gitee/tide-extension-code';
-import { CodeBlock, CodeBlockOptions } from '@gitee/tide-extension-code-block';
-import { Emoji, EmojiOptions, suggestion as emojiSuggestion } from '@gitee/tide-extension-emoji';
-import { HorizontalRule, HorizontalRuleOptions } from '@gitee/tide-extension-horizontal-rule';
-import { Image, ImageOptions } from '@gitee/tide-extension-image';
-import { Indentation, IndentationOptions } from '@gitee/tide-extension-indentation';
-import { Italic, ItalicOptions } from '@gitee/tide-extension-italic';
-import { Link, LinkOptions } from '@gitee/tide-extension-link';
-import { ListItem, ListItemOptions } from '@gitee/tide-extension-list-item';
-import { ListsIndentation, ListsIndentationOptions } from '@gitee/tide-extension-lists-indentation';
-import { OrderedList, OrderedListOptions } from '@gitee/tide-extension-ordered-list';
-import { Strike, StrikeOptions } from '@gitee/tide-extension-strike';
-import {
-  Table,
-  TableCell,
-  TableCellOptions,
-  TableOptions,
-  TableRow,
-  TableRowOptions
-} from '@gitee/tide-extension-table';
-import { TaskItem, TaskItemOptions } from '@gitee/tide-extension-task-item';
-import { Uploader, UploaderOptions } from '@gitee/tide-extension-uploader';
 import { Extension, Extensions } from '@tiptap/core';
+import {
+  Commands,
+  HighPriorityKeymap,
+  LowPriorityKeymap,
+} from '@gitee/tide-common';
 import { Document } from '@tiptap/extension-document';
-import { Dropcursor, DropcursorOptions } from '@tiptap/extension-dropcursor';
-import { Gapcursor } from '@tiptap/extension-gapcursor';
-import { HardBreak, HardBreakOptions } from '@tiptap/extension-hard-break';
-import { Heading, HeadingOptions } from '@tiptap/extension-heading';
-import { History, HistoryOptions } from '@tiptap/extension-history';
 import { Paragraph, ParagraphOptions } from '@tiptap/extension-paragraph';
-import { TaskList, TaskListOptions } from '@tiptap/extension-task-list';
 import { Text } from '@tiptap/extension-text';
 import { TextAlign, TextAlignOptions } from '@tiptap/extension-text-align';
+import { Heading, HeadingOptions } from '@tiptap/extension-heading';
+import { HardBreak, HardBreakOptions } from '@tiptap/extension-hard-break';
+import { History, HistoryOptions } from '@tiptap/extension-history';
+import { Dropcursor, DropcursorOptions } from '@tiptap/extension-dropcursor';
+import { Gapcursor } from '@tiptap/extension-gapcursor';
+import {
+  Table,
+  TableOptions,
+  TableRow,
+  TableRowOptions,
+  TableCell,
+  TableCellOptions,
+} from '@gitee/tide-extension-table';
+import { Link, LinkOptions } from '@gitee/tide-extension-link';
+import { Image, ImageOptions } from '@gitee/tide-extension-image';
+import {
+  Indentation,
+  IndentationOptions,
+} from '@gitee/tide-extension-indentation';
+import {
+  ListsIndentation,
+  ListsIndentationOptions,
+} from '@gitee/tide-extension-lists-indentation';
+import {
+  BulletList,
+  BulletListOptions,
+} from '@gitee/tide-extension-bullet-list';
+import {
+  OrderedList,
+  OrderedListOptions,
+} from '@gitee/tide-extension-ordered-list';
+import { ListItem, ListItemOptions } from '@gitee/tide-extension-list-item';
+import { TaskList, TaskListOptions } from '@tiptap/extension-task-list';
+import { TaskItem, TaskItemOptions } from '@gitee/tide-extension-task-item';
+import {
+  Blockquote,
+  BlockquoteOptions,
+} from '@gitee/tide-extension-blockquote';
+import { Bold, BoldOptions } from '@gitee/tide-extension-bold';
+import { Italic, ItalicOptions } from '@gitee/tide-extension-italic';
+import { Strike, StrikeOptions } from '@gitee/tide-extension-strike';
+import { Code, CodeOptions } from '@gitee/tide-extension-code';
+import { CodeBlock, CodeBlockOptions } from '@gitee/tide-extension-code-block';
+import {
+  Emoji,
+  EmojiOptions,
+  suggestion as emojiSuggestion,
+} from '@gitee/tide-extension-emoji';
+import {
+  HorizontalRule,
+  HorizontalRuleOptions,
+} from '@gitee/tide-extension-horizontal-rule';
 import { Markdown, MarkdownOptions } from '../markdown';
+import { Uploader, UploaderOptions } from '@gitee/tide-extension-uploader';
 
 export interface StarterKitOptions {
   commands: false;
@@ -110,7 +136,7 @@ export const StarterKit = Extension.create<StarterKitOptions>({
       extensions.push(
         TextAlign.configure({
           types: ['heading', 'paragraph'],
-          ...this.options.textAlign
+          ...this.options.textAlign,
         })
       );
     }
@@ -155,7 +181,9 @@ export const StarterKit = Extension.create<StarterKitOptions>({
     }
 
     if (this.options.listsIndentation !== false) {
-      extensions.push(ListsIndentation.configure(this.options.listsIndentation));
+      extensions.push(
+        ListsIndentation.configure(this.options.listsIndentation)
+      );
     }
 
     if (this.options.indentation !== false) {
@@ -170,7 +198,10 @@ export const StarterKit = Extension.create<StarterKitOptions>({
       extensions.push(OrderedList.configure(this.options.orderedList));
     }
 
-    if (this.options.bulletList !== false || this.options.orderedList !== false) {
+    if (
+      this.options.bulletList !== false ||
+      this.options.orderedList !== false
+    ) {
       extensions.push(ListItem.configure(this.options.listItem));
     }
 
@@ -206,7 +237,7 @@ export const StarterKit = Extension.create<StarterKitOptions>({
 
     if (this.options.table !== false) {
       const TableCellExtension = TableCell.extend({
-        content: `(${tableCellContent.join(' | ')})+`
+        content: `(${tableCellContent.join(' | ')})+`,
       });
       extensions.push(Table.configure(this.options.table));
       extensions.push(TableRow.configure(this.options.tableRow));
@@ -219,7 +250,7 @@ export const StarterKit = Extension.create<StarterKitOptions>({
           enableEmoticons: true,
           forceFallbackImages: false,
           suggestion: emojiSuggestion,
-          ...this.options.emoji
+          ...this.options.emoji,
         })
       );
     }
@@ -248,11 +279,11 @@ export const StarterKit = Extension.create<StarterKitOptions>({
           tightLists: true,
           paste: true,
           copy: false,
-          ...this.options.markdown
+          ...this.options.markdown,
         })
       );
     }
 
     return extensions;
-  }
+  },
 });

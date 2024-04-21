@@ -6,18 +6,20 @@ export type ButtonProps = {
   isActive?: boolean;
   children: React.ReactNode;
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  style?: React.CSSProperties | undefined;
 };
 
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ disabled, isActive, children, onClick }, ref) => {
+const TextButton = forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ disabled, style, isActive, children, onClick }, ref) => {
     return (
       <button
+        style={style}
         ref={ref}
         onClick={onClick}
         disabled={disabled}
         className={classNames('tide-menu-bar__btn', {
           'tide-menu-bar__btn--active': isActive,
-          'tide-menu-bar__btn--disabled': disabled,
+          'tide-menu-bar__btn--disabled': disabled
         })}
       >
         {children}
@@ -26,4 +28,6 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   }
 );
 
-Button.displayName = 'Button';
+TextButton.displayName = 'TextButton';
+
+export default TextButton;

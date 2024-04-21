@@ -1,7 +1,6 @@
-import { EditorState } from '@tiptap/pm/state';
 import { isMarkActive, isNodeActive } from '@tiptap/core';
 
-export const isInCode = (state: EditorState): boolean => {
+export const isInCode = (state: any): boolean => {
   return (
     (state.schema.nodes.codeBlock && isNodeActive(state, 'codeBlock')) ||
     (state.schema.marks.code && isMarkActive(state, 'code'))
@@ -73,7 +72,7 @@ export const aHeadingHtmlToMd = (htmlString: string) => {
   for (const match of matches) {
     const level = parseInt(match[1]);
     const text = match[2].trim();
-    const heading = '!'.repeat(level) + ` ${text}`;
+    const heading = `${'!'.repeat(level)} ${text}`;
     result = result.replace(match[0], heading);
   }
 
@@ -89,11 +88,11 @@ export const aWenHaoHtmlToMd = (htmlString: string) => {
   for (const match of matches) {
     const level = match[1].trim().length;
     const text = match[1].trim();
-    const heading = '!~'.repeat(level) + ` ${text}`;
+    const heading = `${'!~'.repeat(level)} ${text}`;
     result = result.replace(match[0], heading);
   }
   return result;
-}
+};
 
 // 处理 a-tiptap-tail 的html
 export const aTailHtmlToMd = (htmlString: string) => {
@@ -107,7 +106,7 @@ export const aTailHtmlToMd = (htmlString: string) => {
     result = result.replace(match[0], heading);
   }
   return result;
-}
+};
 
 // 将!- 转成 a-tiptap-tail
 export const mdTailToHtml = (mdString: string) => {
@@ -121,7 +120,7 @@ export const mdTailToHtml = (mdString: string) => {
     result = result.replace(match[0], heading);
   }
   return result;
-}
+};
 
 // 将!~ 转成 a-tiptap-wenhao
 export const mdWenhaoToHtml = (mdString: string) => {
@@ -134,7 +133,7 @@ export const mdWenhaoToHtml = (mdString: string) => {
     result = result.replace(match[0], heading);
   }
   return result;
-}
+};
 
 // 将^(!{1,${level}})\\s$转成 a-tiptap-h${level}
 export const mdTitleToHtml = (mdString: string) => {
@@ -157,4 +156,4 @@ export const mdTitleToHtml = (mdString: string) => {
   }
 
   return result;
-}
+};

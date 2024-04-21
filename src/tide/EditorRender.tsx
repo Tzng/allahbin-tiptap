@@ -1,11 +1,10 @@
-import { TideEditor } from '@gitee/tide';
 import { ImageBubbleMenu } from '@gitee/tide-extension-image';
 import { LinkBubbleMenu } from '@gitee/tide-extension-link';
 import { MenuBarContextProvider, TextBubbleMenu } from '@gitee/tide-extension-menubar';
 import { TableCellBubbleMenu } from '@gitee/tide-extension-table';
 import React from 'react';
-import { EditorLayout, EditorMenu } from './components';
-import { EditorContent } from './components/EditorContent';
+import type { TideEditor } from './TideEditor';
+import { EditorContent, EditorLayout, EditorMenu } from './components';
 
 export type EditorRenderProps = {
   editor: TideEditor | null;
