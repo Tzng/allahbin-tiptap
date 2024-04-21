@@ -1,37 +1,32 @@
 import React from 'react';
 import './index.css';
-import { EditorRender, useEditor } from '@gitee/tide';
-import { StarterKit } from '@gitee/tide-starter-kit';
 
 import '@gitee/tide/dist/style.css';
 import 'highlight.js/styles/default.css';
-import { AHeading } from './component/AHeading';
-import { ATiptapTail } from './component/ATiptapTail';
-import { ATiptapWenHao } from './component/ATiptapWenHao';
+import { ATail } from './extensions/ATail';
+import { ATitle } from './extensions/ATitle';
+import { AWenHao } from './extensions/AWenHao';
+import { StarterKit } from './starter-kit';
 
+import { EditorRender, useEditor } from './tide';
 
-const AEditorRender = () => {
-
+export default function HomePage() {
   const editor = useEditor({
-    extensions: [StarterKit, AHeading, ATiptapTail, ATiptapWenHao],
-    content: '# Hello World!',
+    extensions: [ATail, AWenHao, ATitle, StarterKit],
     onChange: (doc, editorNow) => {
-      console.log('onChange', doc);
-      console.log(editorNow.getMarkdown());
+      console.log('editor', editorNow.getMarkdown());
     },
-    editorProps: {
-
-    },
-    parseOptions: {
-
+    editorProps: {},
+    parseOptions: {},
+    onReady: editorNow => {
+      console.log('editor', editorNow);
+      editorNow?.setContent('!! 你好 world !!');
     }
   });
 
-
   return (
-    <EditorRender editor={editor} />
+    <div className="main">
+      <EditorRender editor={editor} />
+    </div>
   );
-
 }
-
-export default AEditorRender;

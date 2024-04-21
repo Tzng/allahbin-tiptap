@@ -1,11 +1,13 @@
 {
   "compilerOptions": {
+    "target": "es5",
     "strict": true,
     "declaration": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "jsx": "react",
     "baseUrl": "./",
+    "lib": ["esnext", "dom"],
     "paths": {
       "@@/*": [".dumi/tmp/*"],
       "@allahbin/tiptap": ["src"],
