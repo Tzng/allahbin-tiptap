@@ -15,7 +15,8 @@
     "lint": "npm run lint:es && npm run lint:css",
     "lint:css": "stylelint \"{src,test}/**/*.{css,less}\"",
     "lint:es": "eslint \"{src,test}/**/*.{js,jsx,ts,tsx}\"",
-    "prepublishOnly": "father doctor && npm run build"
+    "prepublishOnly": "father doctor && npm run build",
+    "publishNpm": "yarn publish --access public --registry=https://registry.npmjs.org/"
   },
   "authors": [
     "allahbin <16008@theling.cn>"
