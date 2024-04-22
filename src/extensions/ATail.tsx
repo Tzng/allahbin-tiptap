@@ -2,7 +2,7 @@ import { Node, textblockTypeInputRule } from '@tiptap/core';
 
 export type Level = 1 | 2 | 3;
 
-export interface HeadingOptions {
+export interface ATailOptions {
   HTMLAttributes: Record<string, any>;
 }
 
@@ -22,7 +22,7 @@ declare module '@tiptap/core' {
 }
 
 // 落款
-export const ATail = Node.create<HeadingOptions>({
+export const ATail = Node.create<ATailOptions>({
   name: 'ATail',
 
   addOptions() {
@@ -51,7 +51,6 @@ export const ATail = Node.create<HeadingOptions>({
   },
 
   renderHTML({ node, HTMLAttributes }) {
-    console.log('renderHTML');
     // 合并原有的HTML属性和新的类
     const attrs = {
       ...HTMLAttributes,

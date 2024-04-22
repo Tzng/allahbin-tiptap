@@ -14,6 +14,8 @@ import { EditorProps } from '@tiptap/pm/view';
 import { ALink } from './a-link';
 import { EditorRender, EditorRenderProps, TideEditor, useEditor } from './tide';
 
+export type { IContent2, IMark, ITiptapJson } from './tide';
+
 export const mockImgUploader: UploaderFunc = async (file, progressCallBack) => {
   let src = '';
   const reader = new FileReader();
@@ -35,7 +37,7 @@ export const mockImgUploader: UploaderFunc = async (file, progressCallBack) => {
   });
 };
 
-type IATiptapProps = Omit<EditorRenderProps, 'editor'> & {
+export type IATiptapProps = Omit<EditorRenderProps, 'editor'> & {
   onChange?: (doc: any, editor: TideEditor) => void;
   onReady?: (editor: any) => void;
   editorProps?: EditorProps;
@@ -43,13 +45,22 @@ type IATiptapProps = Omit<EditorRenderProps, 'editor'> & {
   editable?: boolean;
   imageUploader?: UploaderFunc;
   starterKitOpt?: StarterKitOptions;
-  // 回传模式
+  /**
+   * @description 回传模式
+   * @default "json"
+   */
   mode?: 'html' | 'md' | 'json';
-  // 富文本的值 字符串或者json
+  /**
+   * @description 富文本的值 字符串或者json
+   */
   value?: any;
-  // 是否是debug模式
+  /**
+   * @description 是否是debug模式 debug会打印一些额外的日志
+   */
   debug?: boolean;
-  // 编辑器的高度
+  /**
+   * @description 编辑器的高度
+   */
   height?: number;
 };
 
