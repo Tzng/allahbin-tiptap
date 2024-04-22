@@ -57,7 +57,7 @@ const ATiptap: React.FC<IATiptapProps> = ({
   starterKitOpt,
   parseOptions,
   editorProps,
-  mode,
+  mode = 'json',
   onChange,
   debug,
   height = 500,
@@ -113,16 +113,9 @@ const ATiptap: React.FC<IATiptapProps> = ({
     if (isReady && currentValue !== value) {
       if (debug) {
         console.log('editor setContent', value);
-        setCurrentValue(value);
       }
-      if (mode === 'md' || mode === 'html') {
-        editor?.setContent(value || '');
-      } else if (mode === 'json') {
-        if (typeof value !== 'object') {
-          console.error('无效的value');
-        }
-        editor?.setContent(value || {});
-      }
+      setCurrentValue(value);
+      editor?.setContent(value || '');
     }
   }, [value, isReady]);
 
