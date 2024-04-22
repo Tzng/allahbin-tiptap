@@ -9,7 +9,6 @@ import {
   HorizontalRule,
   Image,
   Italic,
-  Link,
   MenuBar,
   MenuBarDivider,
   OrderedList,
@@ -21,6 +20,7 @@ import {
 } from '@gitee/tide-extension-menubar';
 import classNames from 'classnames';
 import React, { useMemo } from 'react';
+import { ALinkBar } from '../../a-link';
 import { ATailBar } from '../../extensions/ATailBar';
 import { ATitleBar } from '../../extensions/ATitleBar';
 import { AWenHaoBar } from '../../extensions/AWenHaoBar';
@@ -41,6 +41,7 @@ export const EditorMenu: React.FC<{
     const {
       AWenHao,
       ATail,
+      ALink,
       ATitle,
       bulletList,
       orderedList,
@@ -73,7 +74,7 @@ export const EditorMenu: React.FC<{
         taskList && <TaskList key="taskList" />
       ],
       [
-        link && <Link key="link" />,
+        link && <ALinkBar key="link" />,
         image && <Image key="image" />,
         table && <Table key="table" />,
         codeBlock && <CodeBlock key="codeBlock" />

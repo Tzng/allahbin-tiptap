@@ -11,8 +11,6 @@
     "lib": ["esnext", "dom"],
     "paths": {
       "@@/*": [".dumi/tmp/*"],
-      "@allahbin/tiptap": ["src"],
-      "@allahbin/tiptap/*": ["src/*", "*"]
     }
   }
 }

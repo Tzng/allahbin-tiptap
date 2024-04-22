@@ -1,7 +1,7 @@
 {
   "name": "@allahbin/tiptap",
   "version": "0.0.1",
-  "description": "基于tiptap的中文文章编辑器",
+  "description": "基于tide和tiptap的中文文章编辑器",
   "module": "dist/index.js",
   "types": "dist/types.d.ts",
   "scripts": {
@@ -25,6 +25,7 @@
   "files": [
     "dist"
   ],
+  "homepage": "https://github.com/Tzng/allahbin-tiptap",
   "commitlint": {
     "extends": [
       "@commitlint/config-conventional"
@@ -70,6 +71,7 @@
     "prettier-plugin-packagejson": "^2.2.18",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-json-view": "^1.21.3",
     "stylelint": "^14.9.1"
   },
   "dependencies": {
@@ -105,6 +107,7 @@
     "@tiptap/extension-hard-break": "^2.3.0",
     "@tiptap/extension-heading": "^2.3.0",
     "@tiptap/extension-history": "^2.3.0",
+    "@tiptap/extension-link": "^2.3.0",
     "@tiptap/extension-paragraph": "^2.3.0",
     "@tiptap/extension-task-list": "^2.3.0",
     "@tiptap/extension-text": "^2.3.0",
