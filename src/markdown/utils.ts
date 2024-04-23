@@ -88,7 +88,7 @@ export const aWenHaoHtmlToMd = (htmlString: string) => {
   for (const match of matches) {
     const level = match[1].trim().length;
     const text = match[1].trim();
-    const heading = `${'!~'.repeat(level)} ${text}`;
+    const heading = `${'!~'.repeat(level > 1 ? 1 : level)} ${text}`;
     result = result.replace(match[0], heading);
   }
   return result;
