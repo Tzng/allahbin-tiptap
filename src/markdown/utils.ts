@@ -65,7 +65,7 @@ export const isMarkdown = (text: string): boolean => {
 
 // 自定义的一些html标签转md
 export const aHeadingHtmlToMd = (htmlString: string) => {
-  const regex = /<div class="a-tiptap-h(\d)">([\s\S]*?)<\/div>/g;
+  const regex = /<div class="a-tiptap-title(\d)">([\s\S]*?)<\/div>/g;
   const matches = htmlString.matchAll(regex);
   let result = htmlString;
 
