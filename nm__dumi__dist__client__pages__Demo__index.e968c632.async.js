@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_allahbin_tiptap=self.webpackChunk_allahbin_tiptap||[]).push([[9],{81809:function(c,a,e){e.r(a),e.d(a,{default:function(){return u}});var n=e(98074),o=e(50959),r=function(){var d=(0,n.UO)(),m=d.id,s=(0,n.WF)(),i=s.demos,l=i[m]||{},t=l.component;return t&&(0,o.createElement)(t)},u=r}}]);
