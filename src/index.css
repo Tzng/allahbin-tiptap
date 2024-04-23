@@ -4,6 +4,10 @@
   text-indent: 2em;
 }
 
+.tide-content .ProseMirror br + span {
+  text-indent: 2em;
+}
+
 .a-tiptap-tail {
   text-align: right;
   padding: 0 4ch;
