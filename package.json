@@ -5,7 +5,7 @@
   "homepage": "https://github.com/Tzng/allahbin-tiptap",
   "license": "MIT",
   "module": "dist/index.js",
-  "types": "dist/types.d.ts",
+  "types": "dist/index.d.ts",
   "files": [
     "dist"
   ],
