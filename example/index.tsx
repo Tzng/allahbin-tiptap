@@ -12,8 +12,6 @@ export default () => {
   const [jsonValue, setJsonValue] = useState();
   // html值
   const [htmlValue, setHtmlValue] = useState();
-  // 是否是只读模式
-  const [readOnly, setReadOnly] = useState(false);
 
   // 值变化
   const onChange = (v: any, editor: any) => {
@@ -26,7 +24,15 @@ export default () => {
 
   return (
     <>
-      <AEditorRender mode={mode} value={value} onChange={onChange} />
+      <AEditorRender
+        onReady={e => {
+          // @ts-ignore
+          window.editor = e;
+        }}
+        mode={mode}
+        value={value}
+        onChange={onChange}
+      />
       <div
         style={{
           marginTop: 12
