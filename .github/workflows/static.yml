@@ -20,7 +20,7 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Build with dumi
-        run: npm run build
+        run: npm run docs:build
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
