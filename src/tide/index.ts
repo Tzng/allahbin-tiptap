@@ -26,18 +26,21 @@ export const useEditor: (
 export interface ITiptapJson {
   type: string | 'doc';
   content: IContent[];
+  contentJsx: any;
   key?: string;
 }
 
-interface IContent {
+export interface IContent {
   type: string;
   attrs: {
+    level: number;
     indent: number;
-    textAlign: string;
+    textAlign: any;
   };
   key?: string;
   content: IContent2[];
 }
+
 export interface IContent2 {
   key?: string;
   type: string;

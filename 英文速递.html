@@ -1,0 +1,949 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title></title>
+<style>
+  /*! HTML5 Boilerplate v9.0.1 | MIT License | https://html5boilerplate.com/ */
+  /* main.css 3.0.0 | MIT License | https://github.com/h5bp/main.css#readme */
+  /*     * What follows is the result of much research on cross-browser styling.     * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,     * Kroc Camen, and the H5BP dev community and team.     */
+  /* ==========================================================================       Base styles: opinionated defaults       ========================================================================== */
+  @font-face {
+    font-family: Alibaba-PuHuiTi;
+    src: url("https://ynk-1252256454.cos-website.ap-nanjing.myqcloud.com/fonts/Alibaba-PuHuiTi-Regular.ttf");
+  }
+
+  body {
+    font-family: Alibaba-PuHuiTi;
+    font-size: 16px;
+    margin: 0;
+  }
+
+  html {
+    color: #222;
+    font-size: 1em;
+    line-height: 1.4;
+  }
+
+  /*     * Remove text-shadow in selection highlight:     * https://twitter.com/miketaylr/status/12228805301     *     * Customize the background color to match your design.     */
+  ::-moz-selection {
+    background: #b3d4fc;
+    text-shadow: none;
+  }
+
+  ::selection {
+    background: #b3d4fc;
+    text-shadow: none;
+  }
+
+  /*     * A better looking default horizontal rule     */
+  hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+  }
+
+  /*     * Remove the gap between audio, canvas, iframes,     * images, videos and the bottom of their containers:     * https://github.com/h5bp/html5-boilerplate/issues/440     */
+  audio,
+  canvas,
+  iframe,
+  img,
+  svg,
+  video {
+    vertical-align: middle;
+  }
+
+  /*     * Remove default fieldset styles.     */
+  fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+  }
+
+  /*     * Allow only vertical resizing of textareas.     */
+  textarea {
+    resize: vertical;
+  }
+
+  /* ==========================================================================       Author's custom styles       ========================================================================== */
+  /* ==========================================================================       Helper classes       ========================================================================== */
+  /*     * Hide visually and from screen readers     */
+  .hidden,
+  [hidden] {
+    display: none !important;
+  }
+
+  /*     * Hide only visually, but have it available for screen readers:     * https://snook.ca/archives/html_and_css/hiding-content-for-accessibility     *     * 1. For long content, line feeds are not interpreted as spaces and small width     *    causes content to wrap 1 word per line:     *    https://medium.com/@jessebeach/beware-smushed-off-screen-accessible-text-5952a4c2cbfe     */
+  .visually-hidden {
+    border: 0;
+    clip: rect(0, 0, 0, 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+    /* 1 */
+  }
+
+  /*     * Extends the .visually-hidden class to allow the element     * to be focusable when navigated to via the keyboard:     * https://www.drupal.org/node/897638     */
+  .visually-hidden.focusable:active,
+  .visually-hidden.focusable:focus {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    white-space: inherit;
+    width: auto;
+  }
+
+  /*     * Hide visually and from screen readers, but maintain layout     */
+  .invisible {
+    visibility: hidden;
+  }
+
+  /*     * Clearfix: contain floats     *     * The use of `table` rather than `block` is only necessary if using     * `::before` to contain the top-margins of child elements.     */
+  .clearfix::before,
+  .clearfix::after {
+    content: "";
+    display: table;
+  }
+
+  .clearfix::after {
+    clear: both;
+  }
+
+  /* ==========================================================================       EXAMPLE Media Queries for Responsive Design.       These examples override the primary ('mobile first') styles.       Modify as content requires.       ========================================================================== */
+  @media only screen and (min-width: 35em) {
+    /* Style adjustments for viewports that meet the condition */
+  }
+
+  @media print,
+  (-webkit-min-device-pixel-ratio: 1.25),
+  (min-resolution: 1.25dppx),
+  (min-resolution: 120dpi) {
+    /* Style adjustments for high resolution devices */
+  }
+
+  /* ==========================================================================       Print styles.       Inlined to avoid the additional HTTP request:       https://www.phpied.com/delay-loading-your-print-css/       ========================================================================== */
+  @media print {
+
+    *,
+    *::before,
+    *::after {
+      background: #fff !important;
+      color: #000 !important;
+      /* Black prints faster */
+      box-shadow: none !important;
+      text-shadow: none !important;
+    }
+
+    a,
+    a:visited {
+      text-decoration: underline;
+    }
+
+    a[href]::after {
+      content: " (" attr(href) ")";
+    }
+
+    abbr[title]::after {
+      content: " (" attr(title) ")";
+    }
+
+    /*       * Don't show links that are fragment identifiers,       * or use the `javascript:` pseudo protocol       */
+    a[href^="#"]::after,
+    a[href^="javascript:"]::after {
+      content: "";
+    }
+
+    pre {
+      white-space: pre-wrap !important;
+    }
+
+    pre,
+    blockquote {
+      border: 1px solid #999;
+      page-break-inside: avoid;
+    }
+
+    tr,
+    img {
+      page-break-inside: avoid;
+    }
+
+    p,
+    h2,
+    h3 {
+      orphans: 3;
+      widows: 3;
+    }
+
+    h2,
+    h3 {
+      page-break-after: avoid;
+    }
+  }
+
+  .flexLeft {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .flexColumn {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
+  .flexBetween {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /**     * 均匀布局     */
+  .binWL_jy {
+    display: flex;
+    justify-content: space-around
+  }
+
+  /**     * 横向从左往右     */
+  .binWL_czwy {
+    display: flex;
+    flex-direction: row
+  }
+
+  /**     * 一左一右     */
+  .binWL_sb {
+    display: flex;
+    justify-content: space-between
+  }
+
+  /**     * 水平居中     */
+  .binWL_r_jz {
+    display: flex;
+    justify-content: center
+  }
+
+  /**     * 垂直布局     */
+  .binWL_cz {
+    display: flex;
+    flex-flow: column
+  }
+
+  /**     * 居中     */
+  .binWL_jz {
+    display: flex;
+    align-items: center
+  }
+
+  .binWL_f1 {
+    flex: 1;
+  }
+
+  /**     * 在右边     */
+  .binWL_r {
+    display: flex;
+    justify-content: flex-end
+  }
+
+  /**     * 填充     */
+  .binWL_f {
+    display: flex
+  }
+
+  .big_title {
+    height: 100px;
+    font-weight: 900;
+    font-size: 68px;
+    color: #00478B;
+    line-height: 99px;
+    text-align: left;
+    font-style: normal;
+    text-transform: none;
+  }
+
+  .bin-ellipsis3 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 3;
+  }
+
+  .bin-ellipsis5 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 5;
+  }
+
+  .bin_content {
+    width: 1200px;
+  }
+
+  .bin_subtitle {
+    font-family: AlibabaSans, AlibabaSans;
+    font-weight: 800;
+    font-size: 28px;
+    color: #333333;
+    line-height: 36px;
+    font-style: normal;
+    text-transform: none;
+  }
+
+  .bin_subtitle:hover {
+    color: #00478B;
+    cursor: pointer;
+  }
+
+  .bin_bold {
+    font-weight: bold;
+  }
+
+  .bin_hand {
+    cursor: pointer;
+  }
+
+  .bin_hand:hover {
+    color: #00478B;
+    cursor: pointer;
+  }
+
+  a {
+    text-decoration: none;
+    color: #333;
+    cursor: pointer;
+    outline: none;
+  }
+
+  a:hover {
+    color: #00478B;
+  }
+
+  .image-container {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .image-container img {
+    transition: transform 0.3s;
+  }
+
+  .image-container:hover img {
+    transform: scale(1.2);
+  }
+</style>
+<style>
+  .Top_Story {
+    margin-top: 126px;
+  }
+
+  .Top_Story_content {
+    position: relative;
+    height: auto;
+    width: 100%;
+  }
+
+  .Top_Story_left_image {
+    width: 640px;
+    height: 340px;
+    margin-top: 70px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .Top_Story_left_image img {
+    width: 100%;
+  }
+
+  .Top_Story_right {
+    position: absolute;
+    top: -50px;
+    left: 562px;
+  }
+
+  .Top_Story_right_box {
+    box-sizing: border-box;
+    width: 640px;
+    height: 340px;
+    background: #F6F6F6;
+  }
+
+  .Top_Story_right_title {
+    width: 387px;
+    text-align: left;
+  }
+
+  .Top_Story_right_content {
+    margin-top: 20px;
+    width: 400px;
+    font-family: AlibabaSans, AlibabaSans;
+    font-weight: 400;
+    font-size: 18px;
+    color: #666666;
+    line-height: 26px;
+    text-align: left;
+    font-style: normal;
+    text-transform: none;
+  }
+
+  .Top_Story_Change {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .Top_Story_Change_item {
+    margin-top: 34px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #00478B;
+    margin-left: 10px;
+  }
+</style>
+<style>
+  .SIAT_Express_head {
+    width: 100%;
+    height: 300px;
+    background-image: url('https://ynk-1252256454.cos-website.ap-nanjing.myqcloud.com/img/banner.jpeg');
+    background-size: cover;
+    background-position: 50% 46%;
+    position: relative;
+  }
+
+  .SIAT_Express_img_logo {
+    margin-top: 20px;
+  }
+
+  .SIAT_Express_img_logo img {
+    width: 76px;
+    height: 76px;
+  }
+
+  .SIAT_Express_title {
+    position: relative;
+    margin-top: -60px;
+  }
+
+  .SIAT_Express_title01 {
+    font-family: Alibaba-PuHuiTi, Alibaba-PuHuiTi;
+    font-weight: bold;
+    font-size: 106px;
+    color: #FFFFFF;
+    text-align: center;
+    font-style: normal;
+    text-transform: none;
+  }
+
+  .SIAT_Express_title02 {
+    margin-top: 24px;
+    font-family: Alibaba-PuHuiTi, Alibaba-PuHuiTi;
+    font-weight: normal;
+    font-size: 28px;
+    color: #FFFFFF;
+    text-shadow: 0 2px 80px #000000;
+    text-align: center;
+    font-style: normal;
+    text-transform: none;
+    transform: translateY(-10px);
+  }
+
+  #Events_Activities_img_box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 60px;
+  }
+
+  .Events_Activities_img_box_item {
+    width: 28%;
+    height: 380px;
+    background: #F6F6F6;
+    padding: 20px;
+  }
+
+  .Events_Activities_img_box_item img {
+    width: 100%;
+    height: 286px;
+    object-fit: cover;
+  }
+
+  .Events_Activities_img_box_item p {
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  .Events_Activities {
+    z-index: 1;
+  }
+
+  .Events_Activities_bg {
+    width: 100%;
+    background-color: #C5D0DB;
+    height: 300px;
+    margin-top: -220px;
+    z-index: 0;
+  }
+
+  .table_title {
+    font-family: AlibabaSans;
+    height: 60px;
+    background: #C5D0DB;
+    border-radius: 16px 16px 0px 0px;
+    font-weight: 800;
+    font-size: 24px;
+    color: #333333;
+    line-height: 24px;
+    text-align: center;
+    font-style: normal;
+    text-transform: none;
+  }
+
+  .table_1 {
+    width: 66%;
+  }
+
+  .table_2 {
+    margin-left: 38px;
+  }
+
+  .table_1 img {
+
+  }
+
+  table {
+    font-size: 12px;
+    border-collapse: collapse;
+    border-radius: 18px;
+  }
+
+  .table_1 > table {
+    width: 100%;
+  }
+
+  .table_2 > table {
+    width: 100%;
+  }
+
+  th,
+  td {
+    border: 1px solid #ffffff;
+    padding: 8px;
+    text-align: center;
+  }
+
+  .table_2 > th {
+    height: 44px;
+  }
+
+  .table_2 > td {
+    height: 32px;
+  }
+
+  tr {
+    background-color: #F6F6F6;
+  }
+
+  table > tr:last-child {
+    border-radius: 0 0 18px 18px;
+  }
+
+  .table_1 > td:nth-child(1) {
+    font-weight: bold;
+  }
+
+  table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .table_1 > table tr:last-child td:first-child {
+    border-bottom-left-radius: 18px;
+  }
+
+  .table_1 > table tr:last-child td:last-child {
+    border-bottom-right-radius: 18px;
+  }
+
+  .table_2 > table tr:last-child td:last-child {
+    border-bottom-right-radius: 18px;
+  }
+
+  div.table_2 > table > tbody > tr:nth-child(8) > td:nth-child(1) {
+    border-bottom-left-radius: 18px;
+  }
+
+  .table_2 td {
+    height: 48px;
+  }
+
+  .table_1 td {
+    height: 50px;
+  }
+
+  .mailbox {
+    margin-top: 40px;
+    font-family: AlibabaSans, AlibabaSans;
+    font-weight: 800;
+    font-size: 24px;
+    color: #185895;
+    line-height: 24px;
+    text-align: left;
+    font-style: normal;
+    text-transform: none;
+  }
+
+  .mailbox a {
+    color: #185895;
+  }
+
+  .copyright_box {
+    width: 100%;
+    background: #00478B;
+    color: #FFFFFF;
+    padding-top: 18px;
+    padding-bottom: 18px;
+    margin-top: 98px;
+  }
+</style>
+<style>
+  .Research_News {
+    margin-top: 120px
+  }
+
+  .MoreButton {
+    width: 160px;
+    height: 48px;
+    border-radius: 8px 8px 8px 8px;
+    border: 1px solid #00478B;
+  }
+
+  .MoreButton span {
+    font-family: AlibabaSans, AlibabaSans;
+    font-weight: bold;
+    font-size: 18px;
+    color: #00478B;
+    text-align: center;
+    font-style: normal;
+    text-transform: none;
+  }
+
+  .Research_Image {
+    width: 340px;
+    height: 400px;
+    background: #EEEEEE;
+    border: 1px solid #E5E5E5;
+    flex-shrink: 0;
+  }
+
+  .Research_Image img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+  }
+
+  .Research_Info {
+    padding: 24px;
+  }
+
+  .Research_Info_Title {
+    height: 72px;
+  }
+
+  .Research_Info_Content {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 3;
+    margin-top: 30px;
+    height: 74px;
+    font-family: AlibabaSans, AlibabaSans;
+    font-weight: 400;
+    font-size: 18px;
+    color: #666666;
+    line-height: 26px;
+  }
+
+  .Research_Info_Img_Box {
+    position: relative;
+    margin-top: 56px;
+    flex: 1;
+  }
+
+  .Research_Info_Img_List {
+    width: 100%;
+    padding-right: 0px;
+    padding-left: 0px;
+    overflow-y: auto;
+  }
+
+  .Research_Info_Img_List a {
+    width: 14%;
+  }
+
+  .Research_Info_Img_List_Items img {
+    margin: 10px;
+    max-width: 100%;
+    height: 120px;
+    background: #F6F6F6;
+    object-fit: cover;
+  }
+
+  .Research_Info_Img_List_Items img:hover {
+    border: 2px solid #208AEC;
+    margin: 8px;
+  }
+
+  .Research_Info_Img_List_Items {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    flex-direction: row;
+  }
+
+  .Research_Info_Img_Box_img-right {
+    position: absolute;
+    background: #999999;
+    opacity: 0.8;
+    width: 60px;
+    height: 60px;
+    z-index: 46;
+    right: 0;
+  }
+
+  .Research_Info_Img_Box_img-left {
+    position: absolute;
+    background: #999999;
+    opacity: 0.8;
+    width: 60px;
+    height: 60px;
+    z-index: 46;
+  }
+</style>
+<meta name="description" content="">
+<meta property="og:title" content="">
+<meta property="og:type" content="">
+<meta property="og:url" content="">
+<meta property="og:image" content="">
+<meta property="og:image:alt" content="">
+<link rel="manifest" href="site.webmanifest">
+<meta name="theme-color" content="#fafafa">
+<script defer="defer" src="https://ynk-1252256454.cos-website.ap-nanjing.myqcloud.com/js/app.js"></script>
+<script defer="defer" src="https://ynk-1252256454.cos-website.ap-nanjing.myqcloud.com/js/research.js"></script>
+
+
+<div class="binWL_r_jz binWL_cz binWL_jz">
+  <div class="SIAT_Express_head binWL_r_jz">
+    <div class="SIAT_Express_img_logo bin_content">
+      <img src="https://ynk-1252256454.cos-website.ap-nanjing.myqcloud.com/img/logo.png" alt="">
+      <div class="SIAT_Express_title">
+        <div class="SIAT_Express_title01">SIAT Express</div>
+        <div class="SIAT_Express_title02">Dreams shape the future, applications create the value.</div>
+        <div class="SIAT_Express_title02" style="margin-top: 8px;font-size: 20px">2024.01-2024.04</div>
+      </div>
+    </div>
+  </div>
+  <div class="bin_content">
+    <div class="Top_Story">
+      <div class="big_title">Top Story</div>
+      <div class="Top_Story_content">
+        <div class="Top_Story_left_image">
+          <img src="https://ynk-1252256454.cos-website.ap-nanjing.myqcloud.com/img/TopStory/1.jpg" alt="">
+        </div>
+        <div class="Top_Story_right">
+          <div class="binWL_r_jz binWL_jz binWL_cz Top_Story_right_box">
+            <a href="https://english.siat.ac.cn/News2017/SN2017/202404/t20240422_660696.html" target="_blank">
+              <div class="Top_Story_right_title bin_subtitle bin-ellipsis3 bin_hand">
+                Pan-Asian Synthetic Cell Research Memorandum of Understanding: A Framework for Strategic and Open Data
+                Cooperation
+              </div>
+              <div class="Top_Story_right_content bin-ellipsis5 bin_hand">
+                At the 2024 Synthetic Cell Asia Workshop held on April 2-3, 2024, the Shenzhen Institute of Advanced
+                Technology (SIAT) under the Chinese Academy of Sciences (CAS) signed a Memorandum of Understanding
+                (MoU)
+                with other 20 institutions from 6 countries. The MoU aims to accelerate and enhance non-commercial
+                research in synthetic biology, particularly focusing on synthetic cells. This collaboration will
+                utilize
+                public-funded biofoundries in respective countries to promote automated and high-throughput research
+                by
+                standardizing and up-scaling the use of computer-aided design software, education, and new workflows.
+              </div>
+            </a>
+          </div>
+          <div class="Top_Story_Change">
+            <div class="Top_Story_Change_item"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="Research_News">
+      <div class="binWL_sb binWL_jz Research_News_title">
+        <div class="big_title">Research News</div>
+        <a href="https://english.siat.ac.cn/News2017/RP2017/" target="_blank">
+          <div class="MoreButton binWL_jz binWL_r_jz">More</div>
+        </a>
+      </div>
+      <div style="margin-top: 70px" class="binWL_czwy">
+        <div class="Research_Image">
+          <a href="https://english.siat.ac.cn/News2017/RP2017/202404/t20240417_660284.html" target="_blank">
+            <img id="Research_Image" src="https://ynk-1252256454.cos-website.ap-nanjing.myqcloud.com/img/ResearchNews/1.png" alt="" data-index="0"
+                 style="
+    width: 100%;object-fit: cover;">
+          </a>
+        </div>
+        <div class="Research_Info binWL_cz">
+          <div class="Research_Info_Title bin_subtitle" data-index="0">
+            <a href="https://english.siat.ac.cn/News2017/RP2017/202404/t20240417_660284.html" target="_blank">
+              Researchers Unveil Vital Role of Astrocytes in Mental Health
+            </a>
+          </div>
+          <div class="Research_Info_Content bin_hand" data-index="0">
+            <a href="https://english.siat.ac.cn/News2017/RP2017/202404/t20240417_660284.html" target="_blank">
+              Astrocytes as vital cells in the central nervous system are crucial for brain health and function.
+              Recent
+              research indicates that they influence higher cognitive functions and behaviors by regulating local
+              neuronal activity. In times of stress, both animals and humans evaluate risks to generate adaptive
+              behaviors such as avoidance. Disruptions in this process, often seen in mental disorders, can lead to
+              excessive risk aversion (e.g., anxiety, depression, and autism) or insufficient risk avoidance (e.g.,
+              substance abuse, and schizophrenia).
+            </a>
+          </div>
+          <div class="Research_Info_Img_Box binWL_jz binWL_czwy">
+            <div id="imageList" class="Research_Info_Img_List binWL_czwy">
+              <div style="padding-right: 24px" class="Research_Info_Img_List_Items">
+                <a href="https://english.siat.ac.cn/News2017/RP2017/202404/t20240417_660284.html" target="_blank">
+                  <img src="https://ynk-1252256454.cos-website.ap-nanjing.myqcloud.com/img/ResearchNews/1.png" alt="" class="img_active">
+                </a>
+                <a href="https://english.siat.ac.cn/News2017/RP2017/202403/t20240329_659056.html" target="_blank">
+                  <img src="https://ynk-1252256454.cos-website.ap-nanjing.myqcloud.com/img/ResearchNews/2.png" alt="" class="">
+                </a>
+                <a href="https://english.siat.ac.cn/News2017/RP2017/202403/t20240313_658451.html" target="_blank">
+                  <img src="https://ynk-1252256454.cos-website.ap-nanjing.myqcloud.com/img/ResearchNews/3.png" alt="" class="">
+                </a>
+                <a href="http://english.siat.cas.cn/News2017/RP2017/202403/t20240311_658079.html" target="_blank">
+                  <img src="https://ynk-1252256454.cos-website.ap-nanjing.myqcloud.com/img/ResearchNews/4.png" alt="" class="">
+                </a>
+                <a href="http://english.siat.cas.cn/News2017/RP2017/202403/t20240306_657997.html" target="_blank">
+                  <img src="https://ynk-1252256454.cos-website.ap-nanjing.myqcloud.com/img/ResearchNews/5.png" alt="" class="">
+                </a>
+                <a href="http://english.siat.cas.cn/News2017/RP2017/202403/t20240305_657960.html" target="_blank">
+                  <img src="https://ynk-1252256454.cos-website.ap-nanjing.myqcloud.com/img/ResearchNews/6.png" alt="" class="">
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="Events_Activities">
+    <div class="bin_content">
+      <div class="big_title" style="margin-top: 106px">
+        <a style="color: #00478B;" href="http://english.siat.ac.cn/News2017/SN2017/" target="_blank">
+          Events, Activities and Visits
+        </a>
+      </div>
+      <div id="Events_Activities_img_box">
+        <div class="Events_Activities_img_box_item">
+          <a href="https://english.siat.ac.cn/News2017/SN2017/202404/t20240424_660909.html" target="_blank">
+            <div class="image-container">
+              <img src="https://ynk-1252256454.cos-website.ap-nanjing.myqcloud.com/img/EventsActivities/0.jpg" alt="">
+            </div>
+            <p class="bin_hand">Advanced Tech Shines on World-class Marine Biology Symposium</p>
+          </a>
+        </div>
+        <div class="Events_Activities_img_box_item">
+          <a href="https://english.siat.ac.cn/LE2017/202404/t20240424_660912.html" target="_blank">
+            <div class="image-container">
+              <img src="https://ynk-1252256454.cos-website.ap-nanjing.myqcloud.com/img/EventsActivities/1.jpg" alt="">
+            </div>
+            <p class="bin_hand">
+              The first activity of 2024, visiting an art exhibition named 「黄浦江，什刹海，哈德逊河 」
+            </p>
+          </a>
+        </div>
+        <div class="Events_Activities_img_box_item">
+          <a href="https://english.siat.ac.cn/News2017/SN2017/202404/t20240424_660908.html" target="_blank">
+            <div class="image-container">
+              <img src="https://ynk-1252256454.cos-website.ap-nanjing.myqcloud.com/img/EventsActivities/2.jpg" alt="">
+            </div>
+            <p class="bin_hand">CAS-PIFI Event Highlights Cutting-Edge Elastic Imaging Technology in Health Sciences
+            </p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="Events_Activities_bg"></div>
+  <div class="bin_content">
+    <div>
+      <div class="big_title" style="margin-top: 106px">
+        <a href="http://english.siat.ac.cn/Education2017/" style="color: #00478B;" target="_blank">
+          International Education
+        </a>
+      </div>
+      <div class="binWL_czwy" style="margin-top: 60px">
+        <div class="table_1" style="
+    width: 61%;
+    overflow: hidden;
+">
+          <img src="https://ynk-1252256454.cos.ap-nanjing.myqcloud.com/img/International/table-1.png" alt="" style="
+    width: 100%;
+    /* height: 100%; */
+    object-fit: cover;
+">
+        </div>
+        <div class="table_2" style="
+    width: 48%;
+    overflow: hidden;
+">
+          <img src="https://ynk-1252256454.cos.ap-nanjing.myqcloud.com/img/International/table-2.png" alt="" style="
+    object-fit: cover;
+    width: 100%;
+">
+        </div>
+      </div>
+    </div>
+    <div class="mailbox binWL_czwy binWL_jz binWL_r_jz">
+      <div class="binWL_jz">
+        <img src="https://ynk-1252256454.cos-website.ap-nanjing.myqcloud.com/img/mailbox.png" alt=""
+             style="margin-right: 8px; height: 20px; width: 24px;">
+        <span> Contact: international.edu@siat.ac.cn </span>
+      </div>
+    </div>
+    <div class="binWL_jz binWL_r_jz" style="margin-top: 118px">
+      <div class="big_title">Careers at SIAT</div>
+    </div>
+    <div class="binWL_jz binWL_r_jz" style="margin-top: 74px">
+      <div class="qr_code">
+        <img src="https://ynk-1252256454.cos-website.ap-nanjing.myqcloud.com/img/QCode.png" alt="">
+      </div>
+      <div class="binWL_cz bin_bold" style="font-size: 30px">
+        <p>
+          Scan the code or visit the website:
+          <a href="https://siat.zhiye.com/" target="_blank"> https://siat.zhiye.com/ </a>
+        </p>
+        <div class="binWL_jz">
+          <img src="https://ynk-1252256454.cos-website.ap-nanjing.myqcloud.com/img/mailbox.png" alt=""
+               style="margin-right: 8px; height: 20px; width: 24px;">
+          <span style="color: #185895"> Contact: hr@siat.ac.cn </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="copyright_box binWL_jz binWL_r_jz binWL_cz">
+  <div>Shenzhen Institute of Advanced Technology, Chinese Academy of Sciences</div>
+  <div>International Cooperation Office: foreign-affairs@siat.ac.cn</div>
+</div>
+<div id="zl-select-content-div"></div>
+
+
