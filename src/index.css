@@ -4,6 +4,18 @@
   text-indent: 2em;
 }
 
+.tide-content .ProseMirror li p {
+  text-indent: 0;
+}
+
+.tide-content .ProseMirror li label {
+  text-indent: 0;
+}
+
+.tide-content .ProseMirror hr {
+  text-indent: 0;
+}
+
 .tide-content .ProseMirror br + span {
   text-indent: 2em;
 }
