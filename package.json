@@ -115,6 +115,9 @@
     "react": ">=16.9.0",
     "react-dom": ">=16.9.0"
   },
+  "resolutions": {
+    "lowlight": "2.9.0"
+  },
   "publishConfig": {
     "access": "public"
   },
