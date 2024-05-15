@@ -6,7 +6,10 @@ import React from 'react';
 /**
  * 获取url的参数
  */
-export function getUrlParams<T = any>(url = window.location.href): T {
+export function getUrlParams<T = any>(url: string): T {
+  if (!url) {
+    return {} as T;
+  }
   const theRequest: any = {};
   if (url.indexOf('?') !== -1) {
     const str = url.split('?')[1];
@@ -42,7 +45,7 @@ function applyMarks(params: {
       title="查看引用"
       data-href={mark.attrs.href}
       onClick={() => {
-        const params = getUrlParams(mark.attrs.href);
+        const params = getUrlParams(mark.attrs?.href);
         onLinkClick?.(params);
       }}
       target={mark.attrs.target}
