@@ -1,7 +1,9 @@
-import { ITiptapJson } from '@allahbin/tiptap';
 import '@gitee/tide/dist/style.css';
 import 'highlight.js/styles/default.css';
 import React from 'react';
+import { ITiptapJson } from '../tide';
+
+export type ILinkRender<T = any> = (node: React.ReactNode, mark: any, params: T) => React.ReactNode;
 
 /**
  * 获取url的参数
@@ -31,7 +33,7 @@ function applyMarks(params: {
   /**
    * 自定义link的渲染
    */
-  linkRender?: (node: React.ReactNode) => React.ReactNode;
+  linkRender?: ILinkRender
 }): React.ReactNode {
   const { marks, text, onLinkClick, linkRender } = params;
   if (!marks || marks.length === 0) return <span>{text}</span>;
@@ -39,35 +41,49 @@ function applyMarks(params: {
   // 递归处理，将文本包裹在最后一个标记的标签中，并对剩余的标记递归调用
   const mark = marks[0];
   const remainingMarks = marks.slice(1);
-  const dom = (
-    <a
-      key={mark.key}
-      title="查看引用"
-      data-href={mark.attrs.href}
-      onClick={() => {
-        const params = getUrlParams(mark.attrs?.href);
-        onLinkClick?.(params);
-      }}
-      target={mark.attrs.target}
-    >
-      {applyMarks({ marks: remainingMarks, text, onLinkClick })}
-    </a>
-  );
+  let hrefParams: any = {};
+  if (mark.type === 'link') {
+    hrefParams = getUrlParams(mark.attrs?.href);
+  }
+  const dom =
+    mark.type === 'link' ? (
+      <a
+        key={mark.key}
+        title="查看引用"
+        data-href={mark.attrs?.href}
+        onClick={() => {
+          onLinkClick?.(hrefParams);
+        }}
+        target={mark.attrs.target}
+      >
+        {applyMarks({ marks: remainingMarks, text, onLinkClick })}
+      </a>
+    ) : null;
 
   switch (mark.type) {
     case 'link':
       if (linkRender) {
-        return linkRender(dom);
+        return linkRender(dom, mark, hrefParams);
       }
       return dom;
     case 'bold':
       return (
-        <strong key={mark.key}>{applyMarks({ marks: remainingMarks, text, onLinkClick })}</strong>
+        <strong key={mark.key}>
+          {applyMarks({ marks: remainingMarks, text, onLinkClick, linkRender })}
+        </strong>
       );
     case 'italic':
-      return <em key={mark.key}>{applyMarks({ marks: remainingMarks, text, onLinkClick })}</em>;
+      return (
+        <em key={mark.key}>
+          {applyMarks({ marks: remainingMarks, text, onLinkClick, linkRender })}
+        </em>
+      );
     default:
-      return <span key={mark.key}>{applyMarks({ marks: remainingMarks, text, onLinkClick })}</span>;
+      return (
+        <span key={mark.key}>
+          {applyMarks({ marks: remainingMarks, text, onLinkClick, linkRender })}
+        </span>
+      );
   }
 }
 
@@ -79,12 +95,17 @@ function renderText(
     /**
      * 自定义link的渲染
      */
-    linkRender?: (node: React.ReactNode) => React.ReactNode;
+    linkRender?: ILinkRender;
   }
 ) {
   return (
     <span key={item.key} style={style}>
-      {applyMarks({ marks: item.marks, text: item.text, onLinkClick: config.onLinkClick })}
+      {applyMarks({
+        marks: item.marks,
+        text: item.text,
+        onLinkClick: config.onLinkClick,
+        linkRender: config.linkRender
+      })}
     </span>
   );
 }
@@ -111,7 +132,7 @@ export const jsonToDom = (
     /**
      * 自定义link的渲染
      */
-    linkRender?: (node: React.ReactNode) => React.ReactNode;
+    linkRender?: ILinkRender;
   }
 ) => {
   if (!json.content) {
@@ -265,4 +286,41 @@ export const jsonToDom = (
       </div>
     </div>
   );
+};
+
+// 从blockJson中获取所有的heading或者ATitle，然后返回成一个树数据，根据level的等级来进行排序，比如level为2的就是在1的子集，如果level为3就是在2的子集
+export const generateDirectoryTree = (jsonData: ITiptapJson): any[] => {
+  if (!jsonData) {
+    return [];
+  }
+  let key = 1;
+  const data = jsonData.content;
+  const directoryTree = [];
+  for (let i = 0; i < data.length; i++) {
+    const newKey = key++;
+    const item = data[i];
+    if (item.type === 'ATitle' || item.type === 'heading') {
+      const node: any = {
+        title: item.content[0].text,
+        label: item.content[0].text,
+        key: `${newKey}`,
+        value: `${newKey}`,
+        isLeaf: true,
+        children: [],
+        pcode: '-1'
+      };
+
+      if (item.attrs.level === 1) {
+        directoryTree.push(node);
+      } else if (item.attrs.level === 2) {
+        if (directoryTree.length > 0) {
+          const parent = directoryTree[directoryTree.length - 1];
+          node.pcode = parent.value;
+          node.isLeaf = false;
+          parent.children!.push(node);
+        }
+      }
+    }
+  }
+  return directoryTree;
 };
