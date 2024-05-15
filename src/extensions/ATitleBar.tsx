@@ -5,12 +5,13 @@ import Tippy from '@tippyjs/react';
 import classNames from 'classnames';
 import React, { useState } from 'react';
 
-const headingLevels: any[] = ['ATitle1', 'ATitle2', 1, 2, 3];
+const headingLevels: any[] = ['ATitle1', 'ATitle2', 'ATitle3', 1, 2, 3];
 
 // 定义标题的中文
 const headingLevelsMap: Record<string, string> = {
   ATitle1: '大标题',
-  ATitle2: '小标题'
+  ATitle2: '小标题(章)',
+  ATitle3: '子标题(节)'
 };
 
 export const ATitleBar: React.FC = () => {

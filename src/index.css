@@ -38,6 +38,16 @@
 }
 
 .tide-content .a-tiptap-title2, .tide-menu-head-row__title--levelATitle2 {
+  font-family: "宋体", serif;
+  font-weight: bold;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  text-align: center;
+  font-size: 18px;
+  text-indent: 0;
+}
+
+.tide-content .a-tiptap-title3, .tide-menu-head-row__title--levelATitle3 {
   font-family: "楷体", serif;
   font-size: 12pt;
   font-weight: normal;
@@ -45,16 +55,6 @@
   margin-top: 2px;
   margin-bottom: 2px;
   line-height: 1.8em;
-}
-
-.tide-content .a-tiptap-title3 {
-  font-family: "宋体", serif;
-  margin-top: 2px;
-  margin-bottom: 2px;
-  text-align: center;
-  text-indent: 0;
-  font-size: 1.125em;
-  font-weight: normal;
 }
 
 .tide-content .a-tiptap-wenhao {
