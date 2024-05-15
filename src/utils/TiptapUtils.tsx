@@ -74,7 +74,10 @@ function renderText(
   style: any,
   config: {
     onLinkClick?: (p: any) => void;
-    linkRender?: () => void;
+    /**
+     * 自定义link的渲染
+     */
+    linkRender?: (node: React.ReactNode) => React.ReactNode;
   }
 ) {
   return (
@@ -103,7 +106,10 @@ export const jsonToDom = (
   json: ITiptapJson,
   config: {
     onLinkClick?: (p: any) => void;
-    linkRender?: () => void;
+    /**
+     * 自定义link的渲染
+     */
+    linkRender?: (node: React.ReactNode) => React.ReactNode;
   }
 ) => {
   if (!json.content) {
