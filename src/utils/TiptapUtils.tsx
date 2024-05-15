@@ -2,7 +2,6 @@ import { ITiptapJson } from '@allahbin/tiptap';
 import '@gitee/tide/dist/style.css';
 import 'highlight.js/styles/default.css';
 import React from 'react';
-import './index.css';
 
 /**
  * 获取url的参数
