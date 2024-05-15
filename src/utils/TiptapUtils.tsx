@@ -19,42 +19,67 @@ export function getUrlParams<T = any>(url = window.location.href): T {
   return theRequest;
 }
 
-function applyMarks(marks: any[], text: string, onLinkClick?: (p: any) => void) {
+/**
+ * 处理文本标记
+ */
+function applyMarks(params: {
+  marks: any[];
+  text: string;
+  onLinkClick?: (p: any) => void;
+  /**
+   * 自定义link的渲染
+   */
+  linkRender?: (node: React.ReactNode) => React.ReactNode;
+}): React.ReactNode {
+  const { marks, text, onLinkClick, linkRender } = params;
   if (!marks || marks.length === 0) return <span>{text}</span>;
 
   // 递归处理，将文本包裹在最后一个标记的标签中，并对剩余的标记递归调用
   const mark = marks[0];
   const remainingMarks = marks.slice(1);
+  const dom = (
+    <a
+      key={mark.key}
+      title="查看引用"
+      data-href={mark.attrs.href}
+      onClick={() => {
+        const params = getUrlParams(mark.attrs.href);
+        onLinkClick?.(params);
+      }}
+      target={mark.attrs.target}
+    >
+      {applyMarks({ marks: remainingMarks, text, onLinkClick })}
+    </a>
+  );
 
   switch (mark.type) {
     case 'link':
-      return (
-        <a
-          key={mark.key}
-          title="查看引用"
-          data-href={mark.attrs.href}
-          onClick={() => {
-            const params = getUrlParams(mark.attrs.href);
-            onLinkClick?.(params);
-          }}
-          target={mark.attrs.target}
-        >
-          {applyMarks(remainingMarks, text, onLinkClick)}
-        </a>
-      );
+      if (linkRender) {
+        return linkRender(dom);
+      }
+      return dom;
     case 'bold':
-      return <strong key={mark.key}>{applyMarks(remainingMarks, text, onLinkClick)}</strong>;
+      return (
+        <strong key={mark.key}>{applyMarks({ marks: remainingMarks, text, onLinkClick })}</strong>
+      );
     case 'italic':
-      return <em key={mark.key}>{applyMarks(remainingMarks, text, onLinkClick)}</em>;
+      return <em key={mark.key}>{applyMarks({ marks: remainingMarks, text, onLinkClick })}</em>;
     default:
-      return <span key={mark.key}>{applyMarks(remainingMarks, text, onLinkClick)}</span>;
+      return <span key={mark.key}>{applyMarks({ marks: remainingMarks, text, onLinkClick })}</span>;
   }
 }
 
-function renderText(item: any, style: any, onLinkClick?: (p: any) => void) {
+function renderText(
+  item: any,
+  style: any,
+  config: {
+    onLinkClick?: (p: any) => void;
+    linkRender?: () => void;
+  }
+) {
   return (
     <span key={item.key} style={style}>
-      {applyMarks(item.marks, item.text, onLinkClick)}
+      {applyMarks({ marks: item.marks, text: item.text, onLinkClick: config.onLinkClick })}
     </span>
   );
 }
@@ -74,7 +99,13 @@ export const paragraphTypes = [
 let isAfterHardBreak = false;
 
 // 将json数据转成dom
-export const jsonToDom = (json: ITiptapJson, onLinkClick?: (p: any) => void) => {
+export const jsonToDom = (
+  json: ITiptapJson,
+  config: {
+    onLinkClick?: (p: any) => void;
+    linkRender?: () => void;
+  }
+) => {
   if (!json.content) {
     return <></>;
   }
@@ -86,7 +117,7 @@ export const jsonToDom = (json: ITiptapJson, onLinkClick?: (p: any) => void) => 
         const style = isAfterHardBreak ? { paddingLeft: '2em' } : {};
         isAfterHardBreak = false;
         if (item.marks) {
-          return renderText(item, style, onLinkClick);
+          return renderText(item, style, config);
         }
         return (
           <span key={item.key} style={style}>
