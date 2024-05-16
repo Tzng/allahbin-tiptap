@@ -85,14 +85,6 @@ export default () => {
         <button
           style={buttonStyle}
           onClick={() => {
-            setValue('<p>123</p>');
-          }}
-        >
-          只读模式
-        </button>
-        <button
-          style={buttonStyle}
-          onClick={() => {
             setMode('html');
             onHtmlChange('<p>123</p>');
           }}
