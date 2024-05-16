@@ -17,4 +17,4 @@ features:
     description: Put ! description here
 ---
 
-@allahbin/tiptap
+ATiptap
