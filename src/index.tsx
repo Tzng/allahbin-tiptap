@@ -1,5 +1,5 @@
-export { mockImgUploader } from './ATiptap';
-export type { IATiptapProps } from './ATiptap';
+export { mockImgUploader } from './ATiptapEdit';
+export type { IATiptapProps } from './ATiptapEdit';
 
 export type { IContent2, IMark, ITiptapJson } from './tide';
 
