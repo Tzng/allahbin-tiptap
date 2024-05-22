@@ -66,7 +66,7 @@ export type IATiptapProps = Omit<EditorRenderProps, 'editor'> & {
   style?: React.CSSProperties;
 };
 
-const ATiptap: React.FC<IATiptapProps> = ({
+const ATiptapEdit: React.FC<IATiptapProps> = ({
   starterKitOpt,
   parseOptions,
   editorProps,
@@ -145,6 +145,14 @@ const ATiptap: React.FC<IATiptapProps> = ({
       />
     </div>
   );
+};
+
+const ATiptap: React.FC<IATiptapProps> = ({ onChange, ...props }) => {
+  const onValueChange = (doc: any, editor: TideEditor) => {
+    onChange?.(doc, editor);
+  };
+
+  return <ATiptapEdit {...props} onChange={onValueChange} />;
 };
 
 export default ATiptap;
