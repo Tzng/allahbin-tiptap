@@ -90,7 +90,6 @@ export const ATitle = Node.create<HeadingOptions>({
       toggleATitle:
         attributes =>
         ({ commands }) => {
-          console.log('toggleATitle');
           if (!this.options.levels.includes(attributes.level)) {
             return false;
           }
