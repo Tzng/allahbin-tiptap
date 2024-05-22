@@ -59,7 +59,11 @@ export type IATiptapProps = Omit<EditorRenderProps, 'editor'> & {
   /**
    * @description 编辑器的高度
    */
-  height?: number;
+  height?: number | string;
+  /**
+   * 编辑器样式
+   */
+  style?: React.CSSProperties;
 };
 
 const ATiptap: React.FC<IATiptapProps> = ({
@@ -71,6 +75,7 @@ const ATiptap: React.FC<IATiptapProps> = ({
   debug,
   height = 500,
   value,
+  style,
   onReady,
   ...props
 }) => {
@@ -133,7 +138,8 @@ const ATiptap: React.FC<IATiptapProps> = ({
       <EditorRender
         editor={editor}
         style={{
-          height: height
+          height: height,
+          ...style
         }}
         {...props}
       />
