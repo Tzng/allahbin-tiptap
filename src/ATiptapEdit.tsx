@@ -22,7 +22,7 @@ export const mockImgUploader: UploaderFunc = async (file, progressCallBack) => {
   };
   reader.readAsDataURL(file);
   console.log('file', file);
-  return new Promise((resolve) => {
+  return new Promise(resolve => {
     let mockProgress = 1;
     const t = setInterval(() => {
       mockProgress++;
@@ -94,11 +94,11 @@ const ATiptapEdit: React.FC<IATiptapProps> = ({
         link: false,
         uploader: {
           image: {
-            uploader: mockImgUploader,
-          },
+            uploader: props.imageUploader || mockImgUploader
+          }
         },
-        ...starterKitOpt,
-      }),
+        ...starterKitOpt
+      })
     ],
     onChange: (doc, editorNow) => {
       let strValue: any;
@@ -114,13 +114,13 @@ const ATiptapEdit: React.FC<IATiptapProps> = ({
     },
     editorProps: editorProps,
     parseOptions: parseOptions || {},
-    onReady: (nowEditor) => {
+    onReady: nowEditor => {
       if (debug) {
         console.log('editor onReady', nowEditor);
       }
       onReady?.(nowEditor);
       setIsReady(true);
-    },
+    }
   });
 
   useEffect(() => {
@@ -139,7 +139,7 @@ const ATiptapEdit: React.FC<IATiptapProps> = ({
         editor={editor}
         style={{
           height: height,
-          ...style,
+          ...style
         }}
         {...props}
       />
