@@ -42,12 +42,12 @@ class TiptapRender {
   /**
    * 渲染的数据json
    */
-  json: ITiptapJson;
+  json: ITiptapJson | undefined;
 
   isAfterHardBreak = false;
 
-  constructor(json: ITiptapJson, config: IRenderConfig) {
-    this.config = config;
+  constructor(json?: ITiptapJson, config?: IRenderConfig) {
+    this.config = config || ({} as IRenderConfig);
     this.json = json;
   }
 
@@ -63,11 +63,12 @@ class TiptapRender {
       mark.type === 'link' ? (
         <a
           key={mark.key}
-          title="点击查看"
-          data-href={mark.attrs?.href}
+          title="链接"
+          href={mark.attrs?.href}
           onClick={() => {
-            this.config.onLinkClick?.(hrefParams);
+            this.config!.onLinkClick?.(hrefParams);
           }}
+          className=""
           target={mark.attrs.target}
         >
           {this.applyMarks({ marks, text })}
@@ -315,7 +316,16 @@ class TiptapRender {
     return this.renderDefault(item);
   }
 
-  render() {
+  render(json?: ITiptapJson, config?: IRenderConfig) {
+    if (json) {
+      this.json = json;
+    }
+    if (config) {
+      this.config = config;
+    }
+    if (!this.json) {
+      return <></>;
+    }
     if (!this.json.content) {
       return <></>;
     }
@@ -327,6 +337,16 @@ class TiptapRender {
         </div>
       </div>
     );
+  }
+
+  // 设置config
+  setConfig(config: IRenderConfig) {
+    this.config = config;
+  }
+
+  // 设置json
+  setJson(json: ITiptapJson) {
+    this.json = json;
   }
 }
 
