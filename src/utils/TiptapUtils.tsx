@@ -16,7 +16,7 @@ export const paragraphTypes = [
 ];
 
 // 将json数据转成dom
-export const jsonToDom = (json: ITiptapJson, config: IRenderConfig) => {
+export const jsonToDom = (json: ITiptapJson, config?: IRenderConfig) => {
   const render = new TiptapRender(json, config);
   return render.render();
 };

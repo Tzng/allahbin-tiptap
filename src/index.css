@@ -1,0 +1,103 @@
+.tide-content .ProseMirror {
+  font-family: "宋体", serif;
+  font-size: 12pt;
+  text-indent: 2em;
+}
+
+.tide-content .ProseMirror li p {
+  text-indent: 0;
+}
+
+.tide-content .ProseMirror li label {
+  text-indent: 0;
+}
+
+.tide-content .ProseMirror hr {
+  text-indent: 0;
+}
+
+.tide-content .ProseMirror br + span {
+  text-indent: 2em;
+}
+
+.tide-content a {
+  color: blue; /* 默认文本颜色为蓝色 */
+  text-decoration: underline; /* 默认有下划线 */
+  cursor: pointer; /* 默认鼠标指针样式为手型 */
+}
+
+.a-tiptap-tail {
+  text-align: right;
+  padding: 0 4ch;
+  margin: 0;
+  line-height: 1;
+}
+
+.tide-content .tide-menu-head-row__title--levelATitle1,.a-tiptap-title1 {
+  font-family: "宋体", serif;
+  font-weight: bold;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  text-align: center;
+  font-size: 24px;
+  text-indent: 0;
+}
+
+.tide-content .a-tiptap-title2, .tide-menu-head-row__title--levelATitle2 {
+  font-family: "宋体", serif;
+  font-weight: bold;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  text-align: center;
+  font-size: 18px;
+  text-indent: 0;
+}
+
+.tide-content .a-tiptap-title3, .tide-menu-head-row__title--levelATitle3 {
+  font-family: "楷体", serif;
+  font-size: 12pt;
+  font-weight: normal;
+  text-indent: 2em;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  line-height: 1.8em;
+}
+
+.tide-content .a-tiptap-wenhao {
+  font-family: "楷体", serif;
+  font-size: 12pt;
+  text-align: center;
+  text-indent: 0;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+.tide-content .ProseMirror h1 {
+  font-family: "宋体", serif;
+  font-size: 12pt;
+  font-weight: bold;
+  line-height: 2em;
+  text-indent: 2em;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+.tide-content .ProseMirror h2 {
+  font-family: "楷体", serif;
+  font-size: 12pt;
+  font-weight: normal;
+  text-indent: 2em;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  line-height: 1.8em;
+}
+
+.tide-content .ProseMirror h3 {
+  font-family: "宋体", serif;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  text-align: center;
+  text-indent: 0;
+  font-size: 1.125em;
+  font-weight: 600;
+}
