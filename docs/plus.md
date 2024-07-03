@@ -21,7 +21,13 @@ class MyEditorRender extends TiptapRender {
 }
 ```
 
-可以查看下面的示例，就是把a标签渲染成h1标签
+然后我们在需要使用的时候，使用自定义的渲染类
+
+```typescript
+myEditorRender.render(jsonValue)
+```
+
+可以看下面的示例，就是把a标签渲染成h1标签，点击按钮就可以看到效果
 
 当然也可以自定义其他的渲染函数：
 
