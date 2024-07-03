@@ -79,4 +79,4 @@ myEditorRender.render(jsonValue)
 
 # 示例
 
-<code src="../example/plus.tsx"></code>
+<code src="../../example/plus.tsx"></code>
