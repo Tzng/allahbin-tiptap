@@ -15,10 +15,18 @@ export const paragraphTypes = [
   'hardBreak'
 ];
 
+// 渲染的对象池
+let renderPool: TiptapRender | null = null;
+
 // 将json数据转成dom
 export const jsonToDom = (json: ITiptapJson, config?: IRenderConfig) => {
-  const render = new TiptapRender(json, config);
-  return render.render();
+  if (renderPool) {
+    renderPool.setJson(json);
+    renderPool.setConfig(config);
+  } else {
+    renderPool = new TiptapRender(json, config);
+  }
+  return renderPool.render();
 };
 
 // 从blockJson中获取所有的heading或者ATitle，然后返回成一个树数据，根据level的等级来进行排序，比如level为2的就是在1的子集，如果level为3就是在2的子集

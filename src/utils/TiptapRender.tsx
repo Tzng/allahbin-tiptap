@@ -340,8 +340,10 @@ class TiptapRender {
   }
 
   // 设置config
-  setConfig(config: IRenderConfig) {
-    this.config = config;
+  setConfig(config?: IRenderConfig) {
+    if (config) {
+      this.config = config;
+    }
   }
 
   // 设置json
