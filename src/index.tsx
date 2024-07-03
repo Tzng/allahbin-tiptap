@@ -5,7 +5,7 @@ export type { IContent2, IMark, ITiptapJson } from './tide';
 
 export { jsonToDom, paragraphTypes } from './utils/TiptapUtils';
 
-export { default as TiptapRender, getUrlParams } from './utils/TiptapRender';
+export { default as TiptapRender, getUrlParams, type IRenderConfig } from './utils/TiptapRender';
 
 import ATiptap from './ATiptap';
 
