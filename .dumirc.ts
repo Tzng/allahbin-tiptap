@@ -5,6 +5,6 @@ export default defineConfig({
   themeConfig: {
     name: 'ATiptap',
   },
-  base: '/allahbin-tiptap/',
-  publicPath: '/allahbin-tiptap/',
+  base: '/',
+  publicPath: '/',
 });
