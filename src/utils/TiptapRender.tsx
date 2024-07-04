@@ -1,7 +1,12 @@
-import { ITiptapJson } from '@allahbin/tiptap';
+import { IContent2, ITiptapJson } from '@allahbin/tiptap';
+import { IContent } from '@allahbin/tiptap/tide';
 import React from 'react';
 
-export type ILinkRender<T = any> = (node: React.ReactNode, mark: any, params: T) => React.ReactNode;
+export type ILinkRender<T = any> = (
+  node: React.ReactNode,
+  mark: any,
+  params: T,
+) => React.ReactNode;
 
 export type IRenderConfig = {
   onLinkClick?: (p: any) => void;
@@ -31,6 +36,11 @@ export function getUrlParams<T = any>(url: string): T {
     }
   }
   return theRequest;
+}
+
+// 数组求和，接收一个数组，返回数组的和
+export function sum(arr: number[]) {
+  return arr.reduce((pre, cur) => pre + cur, 0);
 }
 
 class TiptapRender {
@@ -84,9 +94,9 @@ class TiptapRender {
    * 自定义标记的渲染
    * @param params
    */
-  applyMarks(params: { marks: any[]; text: string }) {
+  applyMarks(params: { marks: any[]; text: string }): any {
     const { marks, text } = params;
-    if (!marks || marks.length === 0) return <span>{text}</span>;
+    if (!marks || marks.length === 0) return text;
 
     // 递归处理，将文本包裹在最后一个标记的标签中，并对剩余的标记递归调用
     const mark = marks[0];
@@ -99,7 +109,7 @@ class TiptapRender {
       case 'italic':
         return this.renderItalic(mark.key, remainingMarks, text);
       default:
-        return <span key={mark.key}>{this.applyMarks({ marks: remainingMarks, text })}</span>;
+        return this.applyMarks({ marks: remainingMarks, text });
     }
   }
 
@@ -116,12 +126,12 @@ class TiptapRender {
    * @param item 数据
    * @param style 样式
    */
-  renderText(item: any, style: React.CSSProperties) {
+  renderText(item: any, style?: React.CSSProperties) {
     return (
       <span key={item.key} style={style}>
         {this.applyMarks({
           marks: item.marks,
-          text: item.text
+          text: item.text,
         })}
       </span>
     );
@@ -135,43 +145,71 @@ class TiptapRender {
     switch (item.attrs.level) {
       case 1:
         return (
-          <h1 key={item.key} id={item.key} style={{ textAlign: item.attrs.textAlign }}>
+          <h1
+            key={item.key}
+            id={item.key}
+            style={{ textAlign: item.attrs.textAlign }}
+          >
             {this.renderContent(item.content)}
           </h1>
         );
       case 2:
         return (
-          <h2 key={item.key} id={item.key} style={{ textAlign: item.attrs.textAlign }}>
+          <h2
+            key={item.key}
+            id={item.key}
+            style={{ textAlign: item.attrs.textAlign }}
+          >
             {this.renderContent(item.content)}
           </h2>
         );
       case 3:
         return (
-          <h3 key={item.key} id={item.key} style={{ textAlign: item.attrs.textAlign }}>
+          <h3
+            key={item.key}
+            id={item.key}
+            style={{ textAlign: item.attrs.textAlign }}
+          >
             {this.renderContent(item.content)}
           </h3>
         );
       case 4:
         return (
-          <h4 key={item.key} id={item.key} style={{ textAlign: item.attrs.textAlign }}>
+          <h4
+            key={item.key}
+            id={item.key}
+            style={{ textAlign: item.attrs.textAlign }}
+          >
             {this.renderContent(item.content)}
           </h4>
         );
       case 5:
         return (
-          <h5 key={item.key} id={item.key} style={{ textAlign: item.attrs.textAlign }}>
+          <h5
+            key={item.key}
+            id={item.key}
+            style={{ textAlign: item.attrs.textAlign }}
+          >
             {this.renderContent(item.content)}
           </h5>
         );
       case 6:
         return (
-          <h6 key={item.key} id={item.key} style={{ textAlign: item.attrs.textAlign }}>
+          <h6
+            key={item.key}
+            id={item.key}
+            style={{ textAlign: item.attrs.textAlign }}
+          >
             {this.renderContent(item.content)}
           </h6>
         );
       default:
         return (
-          <h1 key={item.key} id={item.key} style={{ textAlign: item.attrs.textAlign }}>
+          <h1
+            key={item.key}
+            id={item.key}
+            style={{ textAlign: item.attrs.textAlign }}
+          >
             {this.renderContent(item.content)}
           </h1>
         );
@@ -188,7 +226,11 @@ class TiptapRender {
    */
   renderATitle(item: any) {
     return (
-      <div id={item.key} key={item.key} className={`a-tiptap-title${item.attrs.level}`}>
+      <div
+        id={item.key}
+        key={item.key}
+        className={`a-tiptap-title${item.attrs.level}`}
+      >
         {this.renderContent(item.content)}
       </div>
     );
@@ -238,21 +280,87 @@ class TiptapRender {
    * 渲染codeBlock
    */
   renderCodeBlock(item: any) {
+    console.log('item', item);
     return (
       <div key={item.key} className="react-renderer node-codeBlock">
         <div
           className="tide-code-block"
           style={{
-            whiteSpace: 'normal'
+            whiteSpace: 'normal',
           }}
         >
           <div className="tide-code-block__content">
             <pre className="hljs">
               <code style={{ whiteSpace: 'pre-wrap' }}>
-                <div style={{ whiteSpace: 'inherit' }}>暂不支持</div>
+                <div
+                  style={{ whiteSpace: 'initial', textIndent: 0, fontSize: 14 }}
+                >
+                  {item.content.map((item: any) => {
+                    const processedText = item.text.replaceAll('\\n', '<br>');
+                    console.log('processedText', processedText);
+                    return (
+                      <span
+                        key={item.key}
+                        dangerouslySetInnerHTML={{
+                          __html: processedText,
+                        }}
+                      />
+                    );
+                  })}
+                </div>
               </code>
             </pre>
           </div>
+        </div>
+      </div>
+    );
+  }
+
+  renderRow(row: IContent2) {
+    return (
+      <tr>
+        {row.content.map((cell, index) => {
+          const totalColSpanWidth = sum(cell.attrs!.colwidth);
+          const config: any = {
+            width: `${totalColSpanWidth}px`,
+          };
+          if (cell.attrs!.colspan > 1) {
+            config.colSpan = cell.attrs!.colspan;
+          }
+          if (cell.attrs!.rowspan > 1) {
+            config.rowSpan = cell.attrs!.rowspan;
+          }
+          const pattrs: any = cell.content[0].attrs;
+          delete pattrs.indent;
+          console.log('pattrs', pattrs);
+          return (
+            // eslint-disable-next-line react/no-array-index-key
+            <td key={index} {...config} style={{ width: config.width }}>
+              <p style={{ ...pattrs }}>{cell.content[0].content[0].text}</p>
+            </td>
+          );
+        })}
+      </tr>
+    );
+  }
+
+  /**
+   * 渲染表格
+   */
+  renderTable(item: IContent) {
+    const allWidth: number[] = [];
+    item.content[0].content.forEach((cell) => {
+      allWidth.push(...cell.attrs!.colwidth);
+    });
+    const totalColSpanWidth = sum(allWidth);
+    return (
+      <div className="tableWrapper">
+        <div className="scrollWrapper">
+          <table
+            style={{ width: `${totalColSpanWidth}px`, tableLayout: 'auto' }}
+          >
+            <tbody>{item.content.map((row) => this.renderRow(row))}</tbody>
+          </table>
         </div>
       </div>
     );
@@ -266,7 +374,7 @@ class TiptapRender {
   }
 
   renderContent(content: any[]) {
-    return content?.map(item => {
+    return content?.map((item) => {
       if (item.type === 'text') {
         const style = this.isAfterHardBreak ? { paddingLeft: '2em' } : {};
         this.isAfterHardBreak = false;
@@ -287,7 +395,7 @@ class TiptapRender {
     });
   }
 
-  renderType(item: any) {
+  renderType(item: IContent) {
     if (item.type === 'hardBreak') {
       return this.renderHardBreak(item);
     }
@@ -312,6 +420,9 @@ class TiptapRender {
     if (item.type === 'heading') {
       return this.renderHeading(item);
     }
+    if (item.type === 'table') {
+      return this.renderTable(item);
+    }
     // 判断是不是段落之类的type
     return this.renderDefault(item);
   }
@@ -333,7 +444,7 @@ class TiptapRender {
     return (
       <div className="tide-content">
         <div className="tiptap ProseMirror">
-          {this.json.content.map(item => this.renderType(item))}
+          {this.json.content.map((item) => this.renderType(item))}
         </div>
       </div>
     );
