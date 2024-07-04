@@ -13,6 +13,7 @@ export {
   default as TiptapRender,
   getUrlParams,
   type IRenderConfig,
+  type ILinkRender
 } from './utils/TiptapRender';
 export { default as TiptapRenderFactory } from './utils/TiptapRenderFactory';
 
