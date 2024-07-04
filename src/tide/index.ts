@@ -15,7 +15,7 @@ export * from './TideEditor';
 
 export const useEditor: (
   options: Partial<TideEditorOptions>,
-  deps?: DependencyList
+  deps?: DependencyList,
 ) => TideEditor | null = (options, deps) =>
   // @ts-ignore
   useEditorOriginal<TideEditor, TideEditorOptions>(TideEditor, options, deps);
@@ -47,12 +47,20 @@ export interface IContent2 {
   text?: string;
   marks?: IMark[];
   data_id?: string;
+  content: IMark[];
 }
 
 export interface IMark {
   type: string;
+  text: string;
   attrs?: {
     href: string;
     target: string;
+    textAlign: string;
+    indent?: number;
+    rowspan: number;
+    colspan: number;
+    colwidth: number[];
   };
+  content: IMark[];
 }
