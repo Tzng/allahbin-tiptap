@@ -327,6 +327,32 @@ class TiptapRender {
   }
 
   /**
+   * 渲染图片
+   */
+  renderImage(item: IContent) {
+    const imgClass = `tide-image tide-image__align-${item.attrs.align}`;
+    return (
+      <div className="react-renderer node-image" contentEditable={false}>
+        <div
+          data-drag-handle="true"
+          className={imgClass}
+          style={{
+            whiteSpace: 'normal'
+          }}
+        >
+          <div className="tide-image__view">
+            <img
+              src={item.attrs.src}
+              alt=""
+              style={{ width: item.attrs.width, height: item.attrs.height }}
+            />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  /**
    * 默认的渲染
    */
   renderDefault(item: any) {
@@ -382,6 +408,10 @@ class TiptapRender {
     }
     if (item.type === 'table') {
       return this.renderTable(item);
+    }
+    // 如果是图片
+    if (item.type === 'image') {
+      return this.renderImage(item);
     }
     // 判断是不是段落之类的type
     return this.renderDefault(item);

@@ -15,7 +15,7 @@ export * from './TideEditor';
 
 export const useEditor: (
   options: Partial<TideEditorOptions>,
-  deps?: DependencyList,
+  deps?: DependencyList
 ) => TideEditor | null = (options, deps) =>
   // @ts-ignore
   useEditorOriginal<TideEditor, TideEditorOptions>(TideEditor, options, deps);
@@ -36,6 +36,11 @@ export interface IContent {
     level: number;
     indent: number;
     textAlign: any;
+    src: any;
+    title: any;
+    height: any;
+    width: any;
+    align: any;
   };
   key?: string;
   content: IContent2[];
