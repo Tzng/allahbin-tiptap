@@ -1,7 +1,7 @@
-import TextButton from '../extensions/TextButton';
 import { isActive } from '@gitee/tide-common';
 import { BoldProps, MenuBarItem, Tooltip, useStatusMap } from '@gitee/tide-extension-menubar';
 import React from 'react';
+import TextButton from '../extensions/TextButton';
 
 export type EmojiProps = {
   className?: string;

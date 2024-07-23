@@ -3,17 +3,13 @@ export type { IATiptapProps } from './ATiptapEdit';
 
 export type { IContent2, IMark, ITiptapJson } from './tide';
 
-export {
-  generateDirectoryTree,
-  jsonToDom,
-  paragraphTypes,
-} from './utils/TiptapUtils';
+export { generateDirectoryTree, jsonToDom, paragraphTypes } from './utils/TiptapUtils';
 
 export {
   default as TiptapRender,
   getUrlParams,
-  type IRenderConfig,
-  type ILinkRender
+  type ILinkRender,
+  type IRenderConfig
 } from './utils/TiptapRender';
 export { default as TiptapRenderFactory } from './utils/TiptapRenderFactory';
 

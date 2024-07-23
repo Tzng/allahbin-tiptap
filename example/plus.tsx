@@ -6,7 +6,7 @@ const buttonStyle = {
   marginTop: '10px',
   padding: '5px 10px',
   border: '1px solid #ccc',
-  borderRadius: '5px',
+  borderRadius: '5px'
 };
 
 // 自定义渲染类
@@ -52,7 +52,7 @@ export default () => {
   return (
     <>
       <AEditorRender
-        onReady={(e) => {
+        onReady={e => {
           // @ts-ignore
           window.editor = e;
           editor.current = e;
@@ -63,7 +63,7 @@ export default () => {
       />
       <button
         style={{
-          marginTop: 10,
+          marginTop: 10
         }}
         onClick={() => onChange(defValue, editor)}
       >
