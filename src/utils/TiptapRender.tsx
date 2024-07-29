@@ -1,5 +1,6 @@
 import { IContent2, ITiptapJson } from '@allahbin/tiptap';
 import { IContent } from '@allahbin/tiptap/tide';
+import hljs from 'highlight.js';
 import React from 'react';
 
 export type ILinkRender<T = any> = (node: React.ReactNode, mark: any, params: T) => React.ReactNode;
@@ -245,6 +246,7 @@ class TiptapRender {
    */
   renderCodeBlock(item: any) {
     console.log('item', item);
+    const language = item.attrs.language;
     return (
       <div key={item.key} className="react-renderer node-codeBlock">
         <div
@@ -257,14 +259,15 @@ class TiptapRender {
             <pre className="hljs">
               <code style={{ whiteSpace: 'pre-wrap' }}>
                 <div style={{ whiteSpace: 'initial', textIndent: 0, fontSize: 14 }}>
-                  {item.content.map((item: any) => {
-                    const processedText = item.text.replaceAll('\\n', '<br>');
-                    console.log('processedText', processedText);
+                  {item.content?.map((item: any) => {
+                    console.log('item', item);
+                    const highlightedCode = hljs.highlight(item.text, { language }).value;
                     return (
                       <span
+                        style={{ whiteSpace: 'pre-wrap' }}
                         key={item.key}
                         dangerouslySetInnerHTML={{
-                          __html: processedText
+                          __html: highlightedCode
                         }}
                       />
                     );
@@ -278,9 +281,9 @@ class TiptapRender {
     );
   }
 
-  renderRow(row: IContent2) {
+  renderRow(row: IContent2, index: number) {
     return (
-      <tr>
+      <tr key={row.key || index}>
         {row.content.map((cell, index) => {
           const totalColSpanWidth = sum(cell.attrs!.colwidth);
           const config: any = {
@@ -298,7 +301,7 @@ class TiptapRender {
           return (
             // eslint-disable-next-line react/no-array-index-key
             <td key={index} {...config} style={{ width: config.width }}>
-              <p style={{ ...pattrs }}>{cell.content[0].content[0].text}</p>
+              <p style={{ ...pattrs }}>{cell.content?.[0]?.content?.[0]?.text}</p>
             </td>
           );
         })}
@@ -316,10 +319,10 @@ class TiptapRender {
     });
     const totalColSpanWidth = sum(allWidth);
     return (
-      <div className="tableWrapper">
+      <div className="tableWrapper" key={item.key}>
         <div className="scrollWrapper">
           <table style={{ width: `${totalColSpanWidth}px`, tableLayout: 'auto' }}>
-            <tbody>{item.content.map(row => this.renderRow(row))}</tbody>
+            <tbody>{item.content.map((row, index) => this.renderRow(row, index))}</tbody>
           </table>
         </div>
       </div>
@@ -332,7 +335,7 @@ class TiptapRender {
   renderImage(item: IContent) {
     const imgClass = `tide-image tide-image__align-${item.attrs.align}`;
     return (
-      <div className="react-renderer node-image" contentEditable={false}>
+      <div className="react-renderer node-image" contentEditable={false} key={item.key}>
         <div
           data-drag-handle="true"
           className={imgClass}
@@ -355,12 +358,15 @@ class TiptapRender {
   /**
    * 默认的渲染
    */
-  renderDefault(item: any) {
-    return <p key={item.key}>{this.renderContent(item.content)}</p>;
+  renderDefault(item: any, key: number) {
+    return <p key={item.key || item.type + key}>{this.renderContent(item.content)}</p>;
   }
 
   renderContent(content: any[]) {
-    return content?.map(item => {
+    return content?.map((item, index) => {
+      if (!item.key) {
+        item.key = item.type + index;
+      }
       if (item.type === 'text') {
         const style = this.isAfterHardBreak ? { paddingLeft: '2em' } : {};
         this.isAfterHardBreak = false;
@@ -381,7 +387,7 @@ class TiptapRender {
     });
   }
 
-  renderType(item: IContent) {
+  renderType(item: IContent, index: number) {
     if (item.type === 'hardBreak') {
       return this.renderHardBreak(item);
     }
@@ -414,7 +420,7 @@ class TiptapRender {
       return this.renderImage(item);
     }
     // 判断是不是段落之类的type
-    return this.renderDefault(item);
+    return this.renderDefault(item, index);
   }
 
   render(json?: ITiptapJson, config?: IRenderConfig) {
@@ -431,10 +437,19 @@ class TiptapRender {
       return <></>;
     }
 
+    console.log('this.json', this.json);
+
+    // 循环补充下key
+    this.json.content.forEach((item, index) => {
+      if (!item.key) {
+        item.key = item.type + index;
+      }
+    });
+
     return (
       <div className="tide-content">
         <div className="tiptap ProseMirror">
-          {this.json.content.map(item => this.renderType(item))}
+          {this.json.content.map((item, index) => this.renderType(item, index))}
         </div>
       </div>
     );
