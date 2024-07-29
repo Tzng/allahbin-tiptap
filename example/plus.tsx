@@ -14,9 +14,9 @@ class MyEditorRender extends TiptapRender {
   // 自定义按钮
   renderLink(mark: any, marks: any[], text: string) {
     return (
-      <h1 rel="noopener noreferrer nofollow" style={{ color: '#000' }}>
+      <span rel="noopener noreferrer nofollow" style={{ color: '#e01818' }}>
         {text}
-      </h1>
+      </span>
     );
   }
 }
