@@ -246,7 +246,7 @@ class TiptapRender {
    */
   renderCodeBlock(item: any) {
     console.log('item', item);
-    const language = item.attrs.language;
+    const language = item?.attrs?.language;
     return (
       <div key={item.key} className="react-renderer node-codeBlock">
         <div
@@ -260,8 +260,10 @@ class TiptapRender {
               <code style={{ whiteSpace: 'pre-wrap' }}>
                 <div style={{ whiteSpace: 'initial', textIndent: 0, fontSize: 14 }}>
                   {item.content?.map((item: any) => {
-                    console.log('item', item);
-                    const highlightedCode = hljs.highlight(item.text, { language }).value;
+                    let highlightedCode = item.text;
+                    if (language) {
+                      highlightedCode = hljs.highlight(item.text, { language }).value;
+                    }
                     return (
                       <span
                         style={{ whiteSpace: 'pre-wrap' }}
