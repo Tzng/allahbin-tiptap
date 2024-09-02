@@ -31,8 +31,9 @@ export const EditorMenu: React.FC<{
   editor: TideEditor | null;
   disabledMenu?: boolean;
   menuClassName?: string;
+  onFullscreenChange?: (v: boolean) => void;
   menuStyle?: React.CSSProperties;
-}> = ({ editor, disabledMenu = false, menuClassName, menuStyle }) => {
+}> = ({ editor, disabledMenu = false, menuClassName, menuStyle, onFullscreenChange }) => {
   const { fullscreen, editable } = useEditorContext();
   const menuItems = useMemo(() => {
     if (!editor) {
@@ -91,6 +92,7 @@ export const EditorMenu: React.FC<{
             fullscreen={fullscreen}
             onFullscreenChange={newFullscreen => {
               editor.setFullscreen(newFullscreen);
+              onFullscreenChange(newFullscreen);
             }}
           />
         )

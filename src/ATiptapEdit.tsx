@@ -49,9 +49,13 @@ export type IATiptapProps = Omit<EditorRenderProps, 'editor'> & {
    */
   mode?: 'html' | 'md' | 'json';
   /**
-   * 渲染的模式 - 普通 还是 公文 - 默认是gov
+   * 渲染的模式 - 普通 还是 公文 自定义 - 默认是gov
    */
-  renderMode?: 'normal' | 'gov';
+  renderMode?: 'normal' | 'gov' | 'custom';
+  /**
+   * 边框 - 默认预览是有边框的，但是可以设置成无边框模式
+   */
+  bordered?: boolean;
   /**
    * @description 富文本的值 字符串或者json
    */
@@ -88,6 +92,12 @@ const ATiptapEdit: React.FC<IATiptapProps> = ({
   const [isReady, setIsReady] = React.useState(false);
   // 当前富文本的值
   const [currentValue, setCurrentValue] = React.useState<any | undefined>();
+  // 编辑器的高度
+  const [editorHeight, setEditorHeight] = React.useState(height);
+
+  useEffect(() => {
+    setEditorHeight(height);
+  }, [height]);
 
   const editor = useEditor({
     extensions: [
@@ -118,6 +128,7 @@ const ATiptapEdit: React.FC<IATiptapProps> = ({
       onChange?.(strValue, editorNow);
     },
     editorProps: editorProps,
+    editable: props.editable,
     parseOptions: parseOptions || {},
     onReady: nowEditor => {
       if (debug) {
@@ -127,6 +138,19 @@ const ATiptapEdit: React.FC<IATiptapProps> = ({
       setIsReady(true);
     }
   });
+
+  useEffect(() => {
+    if (editor) {
+      // 更新编辑器的可编辑性
+      editor.setEditable(!!props.editable);
+      if (props.editable && editor.isEmpty) {
+        editor.commands.setContent('<p></p>'); // 设置默认空内容
+      }
+      if (props.editable) {
+        editor.commands.focus('end'); // 切换到编辑模式时自动聚焦
+      }
+    }
+  }, [props.editable, editor]);
 
   useEffect(() => {
     if (isReady && currentValue !== value) {
@@ -139,12 +163,17 @@ const ATiptapEdit: React.FC<IATiptapProps> = ({
   }, [value, isReady]);
 
   return (
-    <div className={`main_${renderMode}`}>
+    <div
+      className={`atiptap_main_${renderMode} atiptap_bordered_${props.editable}_${props.bordered}`}
+    >
       <EditorRender
         editor={editor}
         style={{
-          height: height,
+          height: editorHeight,
           ...style
+        }}
+        onFullscreenChange={() => {
+          setEditorHeight('100%');
         }}
         {...props}
       />

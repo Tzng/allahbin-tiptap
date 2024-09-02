@@ -20,6 +20,12 @@ export default () => {
   const [jsonValue, setJsonValue] = useState<any>();
   // html值
   const [htmlValue, setHtmlValue] = useState<string>();
+  // 是否可以编辑
+  const [editable, setEditable] = useState<boolean>(true);
+  // 是否有边框
+  const [bordered, setBordered] = useState<boolean>(true);
+  // 渲染模式
+  const [renderMode, setRenderMode] = useState<IATiptapProps['renderMode']>('normal');
   // 编辑器的ref
   const editor = React.useRef<any>();
 
@@ -66,17 +72,32 @@ export default () => {
 
   return (
     <>
-      <h2>运行的模式：{mode}</h2>
+      <div>
+        <span>运行的模式</span>&nbsp;
+        <button onClick={() => setEditable(!editable)}>切换模式</button>
+        <select
+          onChange={e => {
+            setRenderMode(e.target.value as any);
+          }}
+        >
+          <option value="normal">normal</option>
+          <option value="gov">gov</option>
+          <option value="custom">custom</option>
+        </select>
+        <button onClick={() => setBordered(!bordered)}>{bordered ? '边框模式' : '无边框'}</button>
+      </div>
       <AEditorRender
         onReady={e => {
           // @ts-ignore
           window.editor = e;
           editor.current = e;
         }}
-        renderMode="normal"
+        renderMode={renderMode}
         mode={mode}
         value={value}
         onChange={onChange}
+        editable={editable}
+        bordered={bordered}
       />
       <div
         style={{

@@ -14,6 +14,7 @@ export type EditorRenderProps = {
   menuStyle?: React.CSSProperties;
   contentClassName?: string;
   contentStyle?: React.CSSProperties;
+  onFullscreenChange?: (v: boolean) => void;
 };
 
 export const EditorRender: React.FC<EditorRenderProps> = ({
@@ -23,7 +24,8 @@ export const EditorRender: React.FC<EditorRenderProps> = ({
   menuClassName,
   menuStyle,
   contentClassName,
-  contentStyle
+  contentStyle,
+  onFullscreenChange
 }) => {
   if (!editor) {
     return null;
@@ -32,7 +34,12 @@ export const EditorRender: React.FC<EditorRenderProps> = ({
   return (
     <EditorLayout editor={editor} style={style} className={className}>
       <MenuBarContextProvider editor={editor}>
-        <EditorMenu editor={editor} menuStyle={menuStyle} menuClassName={menuClassName} />
+        <EditorMenu
+          editor={editor}
+          menuStyle={menuStyle}
+          menuClassName={menuClassName}
+          onFullscreenChange={onFullscreenChange}
+        />
         <EditorContent
           editor={editor}
           contentStyle={contentStyle}

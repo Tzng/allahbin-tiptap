@@ -2,7 +2,15 @@
   font-size: 12pt;
 }
 
-.main_gov .tide-content .ProseMirror {
+.atiptap_bordered_false_false .tide-editor .tide-content .ProseMirror {
+  padding: 0;
+}
+
+.atiptap_bordered_false_false .tide-editor {
+  border: 0;
+}
+
+.atiptap_main_gov .tide-content .ProseMirror {
   font-family: "宋体", serif;
   text-indent: 2em;
 }
@@ -19,7 +27,7 @@
   text-indent: 0;
 }
 
-.main_gov .tide-content .ProseMirror br + span {
+.atiptap_main_gov .tide-content .ProseMirror br + span {
   text-indent: 2em;
 }
 
@@ -65,7 +73,7 @@
   line-height: 1.8em;
 }
 
-.main_gov .tide-content .a-tiptap-title3, .tide-menu-head-row__title--levelATitle3 {
+.atiptap_main_gov .tide-content .a-tiptap-title3, .tide-menu-head-row__title--levelATitle3 {
   text-indent: 2em;
 }
 
@@ -87,7 +95,7 @@
   margin-bottom: 2px;
 }
 
-.main_gov .tide-content .ProseMirror h1 {
+.atiptap_main_gov .tide-content .ProseMirror h1 {
   text-indent: 2em;
 }
 
@@ -100,7 +108,7 @@
   line-height: 1.8em;
 }
 
-.main_gov .tide-content .ProseMirror h2 {
+.atiptap_main_gov .tide-content .ProseMirror h2 {
   text-indent: 2em;
 }
 
