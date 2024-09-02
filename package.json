@@ -1,6 +1,6 @@
 {
   "name": "@allahbin/tiptap",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "description": "基于tide和tiptap的中文文章编辑器",
   "homepage": "https://github.com/Tzng/allahbin-tiptap",
   "license": "MIT",
@@ -21,7 +21,7 @@
     "lint:es": "eslint \"{src,test}/**/*.{js,jsx,ts,tsx}\"",
     "prepare": "husky install && dumi setup",
     "prepublishOnly": "father doctor && npm run build",
-    "publishNpm": "father doctor && npm run build && yarn publish --access public --registry=https://registry.npmjs.org/",
+    "publishNpm": "father doctor && npm run build && npm publish --access public --registry=https://registry.npmjs.org/",
     "start": "npm run dev"
   },
   "commitlint": {
