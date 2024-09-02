@@ -73,6 +73,7 @@ export default () => {
           window.editor = e;
           editor.current = e;
         }}
+        renderMode="normal"
         mode={mode}
         value={value}
         onChange={onChange}

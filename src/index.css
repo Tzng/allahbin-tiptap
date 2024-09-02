@@ -1,6 +1,9 @@
 .tide-content .ProseMirror {
-  font-family: "宋体", serif;
   font-size: 12pt;
+}
+
+.main_gov .tide-content .ProseMirror {
+  font-family: "宋体", serif;
   text-indent: 2em;
 }
 
@@ -16,7 +19,7 @@
   text-indent: 0;
 }
 
-.tide-content .ProseMirror br + span {
+.main_gov .tide-content .ProseMirror br + span {
   text-indent: 2em;
 }
 
@@ -57,10 +60,13 @@
   font-family: "楷体", serif;
   font-size: 12pt;
   font-weight: normal;
-  text-indent: 2em;
   margin-top: 2px;
   margin-bottom: 2px;
   line-height: 1.8em;
+}
+
+.main_gov .tide-content .a-tiptap-title3, .tide-menu-head-row__title--levelATitle3 {
+  text-indent: 2em;
 }
 
 .tide-content .a-tiptap-wenhao {
@@ -77,19 +83,25 @@
   font-size: 12pt;
   font-weight: bold;
   line-height: 2em;
-  text-indent: 2em;
   margin-top: 2px;
   margin-bottom: 2px;
+}
+
+.main_gov .tide-content .ProseMirror h1 {
+  text-indent: 2em;
 }
 
 .tide-content .ProseMirror h2 {
   font-family: "楷体", serif;
   font-size: 12pt;
   font-weight: normal;
-  text-indent: 2em;
   margin-top: 2px;
   margin-bottom: 2px;
   line-height: 1.8em;
+}
+
+.main_gov .tide-content .ProseMirror h2 {
+  text-indent: 2em;
 }
 
 .tide-content .ProseMirror h3 {

@@ -49,6 +49,10 @@ export type IATiptapProps = Omit<EditorRenderProps, 'editor'> & {
    */
   mode?: 'html' | 'md' | 'json';
   /**
+   * 渲染的模式 - 普通 还是 公文 - 默认是gov
+   */
+  renderMode?: 'normal' | 'gov';
+  /**
    * @description 富文本的值 字符串或者json
    */
   value?: any;
@@ -77,6 +81,7 @@ const ATiptapEdit: React.FC<IATiptapProps> = ({
   value,
   style,
   onReady,
+  renderMode = 'gov',
   ...props
 }) => {
   // 编辑器是否初始化完成
@@ -134,7 +139,7 @@ const ATiptapEdit: React.FC<IATiptapProps> = ({
   }, [value, isReady]);
 
   return (
-    <div className="main">
+    <div className={`main_${renderMode}`}>
       <EditorRender
         editor={editor}
         style={{
