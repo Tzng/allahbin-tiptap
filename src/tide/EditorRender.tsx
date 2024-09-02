@@ -38,7 +38,7 @@ export const EditorRender: React.FC<EditorRenderProps> = ({
           editor={editor}
           menuStyle={menuStyle}
           menuClassName={menuClassName}
-          onFullscreenChange={onFullscreenChange}
+          onFullscreenChange={v => onFullscreenChange?.(v)}
         />
         <EditorContent
           editor={editor}

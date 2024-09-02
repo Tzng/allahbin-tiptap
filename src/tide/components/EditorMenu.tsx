@@ -31,7 +31,7 @@ export const EditorMenu: React.FC<{
   editor: TideEditor | null;
   disabledMenu?: boolean;
   menuClassName?: string;
-  onFullscreenChange?: (v: boolean) => void;
+  onFullscreenChange: (v: boolean) => void;
   menuStyle?: React.CSSProperties;
 }> = ({ editor, disabledMenu = false, menuClassName, menuStyle, onFullscreenChange }) => {
   const { fullscreen, editable } = useEditorContext();
