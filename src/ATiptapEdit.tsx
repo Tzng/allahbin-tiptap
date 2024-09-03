@@ -150,7 +150,7 @@ const ATiptapEdit: React.FC<IATiptapProps> = ({
         editor.commands.focus('end'); // 切换到编辑模式时自动聚焦
       }
     }
-  }, [props.editable, editor]);
+  }, [props.editable]);
 
   useEffect(() => {
     if (isReady && currentValue !== value) {
