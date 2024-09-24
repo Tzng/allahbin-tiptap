@@ -1,4 +1,4 @@
-import { IContent2, ITiptapJson } from '@allahbin/tiptap';
+import { IATiptapProps, IContent2, ITiptapJson } from '@allahbin/tiptap';
 import { IContent } from '@allahbin/tiptap/tide';
 import hljs from 'highlight.js';
 import React from 'react';
@@ -15,6 +15,10 @@ export type IRenderConfig = {
    * 自定义高亮的渲染
    */
   textRender?: (text: string) => React.ReactNode;
+  /**
+   * 渲染的模式 - 普通 还是 公文 自定义 - 默认是gov
+   */
+  renderMode?: IATiptapProps['renderMode'];
 };
 
 /**
@@ -54,7 +58,11 @@ class TiptapRender {
   isAfterHardBreak = false;
 
   constructor(json?: ITiptapJson, config?: IRenderConfig) {
-    this.config = config || ({} as IRenderConfig);
+    this.config =
+      config ||
+      ({
+        renderMode: 'custom'
+      } as IRenderConfig);
     this.json = json;
   }
 
@@ -262,7 +270,9 @@ class TiptapRender {
                   {item.content?.map((item: any) => {
                     let highlightedCode = item.text;
                     if (language) {
-                      highlightedCode = hljs.highlight(item.text, { language }).value;
+                      highlightedCode = hljs.highlight(item.text, {
+                        language
+                      }).value;
                     }
                     return (
                       <span
@@ -439,8 +449,6 @@ class TiptapRender {
       return <></>;
     }
 
-    console.log('this.json', this.json);
-
     // 循环补充下key
     this.json.content.forEach((item, index) => {
       if (!item.key) {
@@ -449,9 +457,11 @@ class TiptapRender {
     });
 
     return (
-      <div className="tide-content">
-        <div className="tiptap ProseMirror">
-          {this.json.content.map((item, index) => this.renderType(item, index))}
+      <div className={`atiptap_main_${this.config.renderMode}`}>
+        <div className="tide-content">
+          <div className="tiptap ProseMirror">
+            {this.json.content.map((item, index) => this.renderType(item, index))}
+          </div>
         </div>
       </div>
     );
