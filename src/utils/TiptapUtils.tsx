@@ -37,6 +37,13 @@ export const generateDirectoryTree = (jsonData: ITiptapJson): any[] => {
   let key = 1;
   const data = jsonData.content;
   const directoryTree = [];
+  // 先查询下最大的level
+  const maxLevel = data.reduce((max, item) => {
+    if (item.type === 'ATitle' || item.type === 'heading') {
+      return Math.max(max, item.attrs.level);
+    }
+    return max;
+  }, 0);
   for (let i = 0; i < data.length; i++) {
     const newKey = key++;
     const item = data[i];
@@ -50,16 +57,19 @@ export const generateDirectoryTree = (jsonData: ITiptapJson): any[] => {
         children: [],
         pcode: '-1'
       };
-
-      if (item.attrs.level === 1) {
-        directoryTree.push(node);
-      } else if (item.attrs.level === 2) {
-        if (directoryTree.length > 0) {
-          const parent = directoryTree[directoryTree.length - 1];
-          node.pcode = parent.value;
-          node.isLeaf = false;
-          parent.children!.push(node);
+      if (maxLevel === 1) {
+        if (item.attrs.level === 1) {
+          directoryTree.push(node);
+        } else if (item.attrs.level === 2) {
+          if (directoryTree.length > 0) {
+            const parent = directoryTree[directoryTree.length - 1];
+            node.pcode = parent.value;
+            node.isLeaf = false;
+            parent.children!.push(node);
+          }
         }
+      } else {
+        directoryTree.push(node);
       }
     }
   }

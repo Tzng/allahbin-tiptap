@@ -50,7 +50,6 @@ export const AWenHao = Node.create<HeadingOptions>({
   },
 
   renderHTML({ node, HTMLAttributes }) {
-    console.log('renderHTML');
     // 合并原有的HTML属性和新的类
     const attrs = {
       ...HTMLAttributes,
