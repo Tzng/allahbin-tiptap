@@ -327,7 +327,9 @@ class TiptapRender {
   renderTable(item: IContent) {
     const allWidth: number[] = [];
     item.content[0].content.forEach(cell => {
-      allWidth.push(...cell.attrs!.colwidth);
+      if (cell.attrs?.colwidth) {
+        allWidth.push(...cell.attrs.colwidth);
+      }
     });
     const totalColSpanWidth = sum(allWidth);
     return (
