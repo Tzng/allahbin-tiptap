@@ -297,6 +297,9 @@ class TiptapRender {
     return (
       <tr key={row.key || index}>
         {row.content.map((cell, index) => {
+          if (!cell.attrs?.colwidth) {
+            return null;
+          }
           const totalColSpanWidth = sum(cell.attrs!.colwidth);
           const config: any = {
             width: `${totalColSpanWidth}px`
@@ -384,14 +387,7 @@ class TiptapRender {
       if (item.type === 'text') {
         const style = this.isAfterHardBreak ? { paddingLeft: '2em' } : {};
         this.isAfterHardBreak = false;
-        if (item.marks) {
-          return this.renderText(item, style);
-        }
-        return (
-          <span key={item.key} style={style}>
-            {item.text}
-          </span>
-        );
+        return this.renderText(item, style);
       }
       if (item.type === 'hardBreak') {
         this.isAfterHardBreak = true;
