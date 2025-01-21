@@ -22,7 +22,7 @@ export const mockImgUploader: UploaderFunc = async (file, progressCallBack) => {
   };
   reader.readAsDataURL(file);
   console.log('file', file);
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     let mockProgress = 1;
     const t = setInterval(() => {
       mockProgress++;
@@ -37,51 +37,51 @@ export const mockImgUploader: UploaderFunc = async (file, progressCallBack) => {
 
 export type SimpleConfigureOptions = {
   /** 是否启用标题功能 */
-  heading?: boolean;
+  heading?: false;
   /** 是否启用表格功能 */
-  table?: boolean;
+  table?: false;
   /** 是否启用图片功能 */
-  image?: boolean;
+  image?: false;
   /** 是否启用无序列表功能 */
-  bulletList?: boolean;
+  bulletList?: false;
   /** 是否启用有序列表功能 */
-  orderedList?: boolean;
+  orderedList?: false;
   /** 是否启用引用块功能 */
-  blockquote?: boolean;
+  blockquote?: false;
   /** 是否启用代码块功能 */
-  codeBlock?: boolean;
+  codeBlock?: false;
   /** 是否启用水平分割线功能 */
-  horizontalRule?: boolean;
+  horizontalRule?: false;
   /** 是否启用加粗功能 */
-  bold?: boolean;
+  bold?: false;
   /** 是否启用斜体功能 */
-  italic?: boolean;
+  italic?: false;
   /** 是否启用删除线功能 */
-  strike?: boolean;
+  strike?: false;
   /** 是否启用行内代码功能 */
-  code?: boolean;
+  code?: false;
   /** 是否启用文本对齐功能 */
-  textAlign?: boolean;
+  textAlign?: false;
   /** 是否启用缩进功能 */
-  indent?: boolean;
+  indent?: false;
   /** 是否启用行高功能 */
-  lineHeight?: boolean;
+  lineHeight?: false;
   /** 是否启用文本颜色功能 */
-  color?: boolean;
+  color?: false;
   /** 是否启用文本高亮功能 */
-  highlight?: boolean;
+  highlight?: false;
   /** 是否启用字体大小功能 */
-  fontSize?: boolean;
+  fontSize?: false;
   /** 是否启用字体类型功能 */
-  fontFamily?: boolean;
+  fontFamily?: false;
   /** 是否启用下标功能 */
-  subscript?: boolean;
+  subscript?: false;
   /** 是否启用上标功能 */
-  superscript?: boolean;
+  superscript?: false;
   /** 是否启用下划线功能 */
-  underline?: boolean;
+  underline?: false;
   /** 是否启用文本样式功能 */
-  textStyle?: boolean;
+  textStyle?: false;
 };
 
 export type IATiptapProps = Omit<EditorRenderProps, 'editor'> & {
@@ -167,10 +167,12 @@ const ATiptapEdit: React.FC<IATiptapProps> = ({
     orderedList: false,
     blockquote: false,
     codeBlock: false,
-    horizontalRule: false
+    horizontalRule: false,
   };
 
-  const finalSimpleConfigure = simple ? { ...defaultSimpleConfigure, ...userSimpleConfigure } : {};
+  const finalSimpleConfigure = simple
+    ? { ...defaultSimpleConfigure, ...userSimpleConfigure }
+    : {};
 
   const editor = useEditor({
     extensions: [
@@ -180,12 +182,12 @@ const ATiptapEdit: React.FC<IATiptapProps> = ({
         link: false,
         uploader: {
           image: {
-            uploader: props.imageUploader || mockImgUploader
-          }
+            uploader: props.imageUploader || mockImgUploader,
+          },
         },
         ...(simple ? finalSimpleConfigure : {}),
-        ...starterKitOpt
-      })
+        ...starterKitOpt,
+      }),
     ],
     onChange: (doc, editorNow) => {
       let strValue: any;
@@ -202,13 +204,13 @@ const ATiptapEdit: React.FC<IATiptapProps> = ({
     editorProps: editorProps,
     editable: props.editable,
     parseOptions: parseOptions || {},
-    onReady: nowEditor => {
+    onReady: (nowEditor) => {
       if (debug) {
         console.log('editor onReady', nowEditor);
       }
       onReady?.(nowEditor);
       setIsReady(true);
-    }
+    },
   });
 
   useEffect(() => {
@@ -244,7 +246,7 @@ const ATiptapEdit: React.FC<IATiptapProps> = ({
         editor={editor}
         style={{
           height: editorHeight,
-          ...style
+          ...style,
         }}
         onFullscreenChange={() => {
           setEditorHeight('100%');
