@@ -35,6 +35,55 @@ export const mockImgUploader: UploaderFunc = async (file, progressCallBack) => {
   });
 };
 
+export type SimpleConfigureOptions = {
+  /** 是否启用标题功能 */
+  heading?: boolean;
+  /** 是否启用表格功能 */
+  table?: boolean;
+  /** 是否启用图片功能 */
+  image?: boolean;
+  /** 是否启用无序列表功能 */
+  bulletList?: boolean;
+  /** 是否启用有序列表功能 */
+  orderedList?: boolean;
+  /** 是否启用引用块功能 */
+  blockquote?: boolean;
+  /** 是否启用代码块功能 */
+  codeBlock?: boolean;
+  /** 是否启用水平分割线功能 */
+  horizontalRule?: boolean;
+  /** 是否启用加粗功能 */
+  bold?: boolean;
+  /** 是否启用斜体功能 */
+  italic?: boolean;
+  /** 是否启用删除线功能 */
+  strike?: boolean;
+  /** 是否启用行内代码功能 */
+  code?: boolean;
+  /** 是否启用文本对齐功能 */
+  textAlign?: boolean;
+  /** 是否启用缩进功能 */
+  indent?: boolean;
+  /** 是否启用行高功能 */
+  lineHeight?: boolean;
+  /** 是否启用文本颜色功能 */
+  color?: boolean;
+  /** 是否启用文本高亮功能 */
+  highlight?: boolean;
+  /** 是否启用字体大小功能 */
+  fontSize?: boolean;
+  /** 是否启用字体类型功能 */
+  fontFamily?: boolean;
+  /** 是否启用下标功能 */
+  subscript?: boolean;
+  /** 是否启用上标功能 */
+  superscript?: boolean;
+  /** 是否启用下划线功能 */
+  underline?: boolean;
+  /** 是否启用文本样式功能 */
+  textStyle?: boolean;
+};
+
 export type IATiptapProps = Omit<EditorRenderProps, 'editor'> & {
   onChange?: (doc: any, editor: TideEditor) => void;
   onReady?: (editor: any) => void;
@@ -69,9 +118,18 @@ export type IATiptapProps = Omit<EditorRenderProps, 'editor'> & {
    */
   height?: number | string;
   /**
+   * @description 是否使用简单模式（适用于聊天输入框等场景）
+   * @default false
+   */
+  simple?: boolean;
+  /**
    * 编辑器样式
    */
   style?: React.CSSProperties;
+  /**
+   * @description 简单模式的配置项，可以指定禁用哪些功能
+   */
+  simpleConfigure?: Partial<SimpleConfigureOptions>;
 };
 
 const ATiptapEdit: React.FC<IATiptapProps> = ({
@@ -85,7 +143,9 @@ const ATiptapEdit: React.FC<IATiptapProps> = ({
   value,
   style,
   onReady,
-  renderMode = 'gov',
+  simple = false,
+  renderMode = simple ? 'normal' : 'gov',
+  simpleConfigure: userSimpleConfigure,
   ...props
 }) => {
   // 编辑器是否初始化完成
@@ -99,11 +159,22 @@ const ATiptapEdit: React.FC<IATiptapProps> = ({
     setEditorHeight(height);
   }, [height]);
 
+  const defaultSimpleConfigure: SimpleConfigureOptions = {
+    heading: false,
+    table: false,
+    image: false,
+    bulletList: false,
+    orderedList: false,
+    blockquote: false,
+    codeBlock: false,
+    horizontalRule: false
+  };
+
+  const finalSimpleConfigure = simple ? { ...defaultSimpleConfigure, ...userSimpleConfigure } : {};
+
   const editor = useEditor({
     extensions: [
-      ATail,
-      AWenHao,
-      ATitle,
+      ...(simple ? [] : [ATail, AWenHao, ATitle]),
       ALink,
       StarterKit.configure({
         link: false,
@@ -112,6 +183,7 @@ const ATiptapEdit: React.FC<IATiptapProps> = ({
             uploader: props.imageUploader || mockImgUploader
           }
         },
+        ...(simple ? finalSimpleConfigure : {}),
         ...starterKitOpt
       })
     ],
@@ -164,7 +236,9 @@ const ATiptapEdit: React.FC<IATiptapProps> = ({
 
   return (
     <div
-      className={`atiptap_main_${renderMode} atiptap_bordered_${props.editable}_${props.bordered}`}
+      className={`atiptap_main_${renderMode} atiptap_bordered_${
+        props.editable
+      }_${props.bordered} ${simple ? 'atiptap_simple' : ''}`}
     >
       <EditorRender
         editor={editor}
